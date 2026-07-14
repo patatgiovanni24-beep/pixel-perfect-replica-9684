@@ -102,9 +102,11 @@
   transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
   border: none;
-}
-@utility btn-cta {
-  &:hover { background-color: oklch(0.6 0.11 55); transform: translateY(-1px); box-shadow: 0 8px 20px -8px oklch(0.66 0.11 55 / 0.5); }
+  &:hover {
+    background-color: oklch(0.6 0.11 55);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px -8px oklch(0.66 0.11 55 / 0.5);
+  }
 }
 
 @utility btn-outline-forest {
@@ -124,7 +126,8 @@
   border-radius: 2px;
   transition: all 0.2s ease;
   cursor: pointer;
-}
-@utility btn-outline-forest {
-  &:hover { background-color: var(--color-forest); color: var(--color-forest-foreground); }
+  &:hover {
+    background-color: var(--color-forest);
+    color: var(--color-forest-foreground);
+  }
 }
