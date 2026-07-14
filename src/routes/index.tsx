@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import heroMountain from "@/assets/hero-mountain.jpg";
 import zoncolan from "@/assets/zoncolan.jpg";
 import hotelInterior from "@/assets/hotel-interior.jpg";
@@ -870,5 +870,3 @@ function Footer() {
   );
 }
 
-// Ensure useEffect is imported (unused otherwise); keep bundle happy
-void useEffect;
