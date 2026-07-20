@@ -20,6 +20,9 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# Source photos (raw, uncompressed - optimized copies live in src/assets)
+/Immagini/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

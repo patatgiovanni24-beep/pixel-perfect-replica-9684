@@ -2,10 +2,29 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import heroMountain from "@/assets/hero-mountain.jpg";
 import zoncolan from "@/assets/zoncolan.jpg";
-import hotelInterior from "@/assets/hotel-interior.jpg";
 import village from "@/assets/village.jpg";
-import room from "@/assets/room.jpg";
-import breakfast from "@/assets/breakfast.jpg";
+import logo from "@/assets/logo.svg";
+import lounge from "@/assets/lounge.jpg";
+import roomSingola from "@/assets/room-singola.jpg";
+import roomDoppia from "@/assets/room-doppia.jpg";
+import roomTripla from "@/assets/room-tripla.jpg";
+import roomQuadrupla from "@/assets/room-quadrupla.jpg";
+import roomDormitorio7 from "@/assets/room-dormitorio-7.jpg";
+import roomDormitorio8 from "@/assets/room-dormitorio-8.jpg";
+import breakfastTable from "@/assets/breakfast-table.jpg";
+import gardenMountain from "@/assets/garden-mountain.jpg";
+import windowView from "@/assets/window-view.jpg";
+import conferenceRoom from "@/assets/conference-room.jpg";
+import partnerAlCaratel from "@/assets/partner-al-caratel.jpg";
+import partnerPrivilegio from "@/assets/partner-privilegio.jpg";
+import partnerLaugiane from "@/assets/partner-laugiane.jpg";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -58,11 +77,17 @@ function Nav({ tab, setTab }: { tab: TabId; setTab: (t: TabId) => void }) {
         <button
           onClick={() => setTab("home")}
           className="flex items-center gap-3 text-left"
-          aria-label="Hotel Alpi-In home"
+          aria-label="Hotel alpi.in home"
         >
-          <Logo />
+          <div className="h-11 w-11 overflow-hidden">
+            <img
+              src={logo}
+              alt=""
+              className="h-full w-full origin-top scale-[1.6] object-contain brightness-0 invert"
+            />
+          </div>
           <div className="leading-tight">
-            <div className="font-display text-lg lowercase tracking-tight">alpi-in</div>
+            <div className="font-display text-lg lowercase tracking-tight">alpi.in</div>
             <div className="eyebrow text-[10px] opacity-80">Arta Terme · Carnia</div>
           </div>
         </button>
@@ -77,19 +102,20 @@ function Nav({ tab, setTab }: { tab: TabId; setTab: (t: TabId) => void }) {
               }`}
             >
               {t.label}
-              {tab === t.id && (
-                <span className="absolute -bottom-0.5 left-0 h-0.5 w-full bg-cta" />
-              )}
+              {tab === t.id && <span className="absolute -bottom-0.5 left-0 h-0.5 w-full bg-cta" />}
             </button>
           ))}
         </nav>
 
-        <button
-          className="md:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
-        >
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          >
             <path d="M3 6h18M3 12h18M3 18h18" />
           </svg>
         </button>
@@ -116,26 +142,16 @@ function Nav({ tab, setTab }: { tab: TabId; setTab: (t: TabId) => void }) {
   );
 }
 
-function Logo() {
-  return (
-    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
-      <circle cx="18" cy="18" r="17" stroke="currentColor" strokeWidth="1" opacity="0.4" />
-      <path
-        d="M6 24 L14 12 L18 18 L22 13 L30 24 Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinejoin="round"
-      />
-      <circle cx="24" cy="10" r="1.5" fill="#C68B59" />
-    </svg>
-  );
-}
-
 /* ---------------------------- ICONS ---------------------------- */
 
 function Icon({ name, className = "h-6 w-6" }: { name: string; className?: string }) {
-  const p = { fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+  const p = {
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.5,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+  };
   switch (name) {
     case "ski":
       return (
@@ -214,6 +230,20 @@ function Icon({ name, className = "h-6 w-6" }: { name: string; className?: strin
           <circle cx="12" cy="9" r="2.5" />
         </svg>
       );
+    case "instagram":
+      return (
+        <svg viewBox="0 0 24 24" className={className} {...p}>
+          <rect x="3" y="3" width="18" height="18" rx="5" />
+          <circle cx="12" cy="12" r="4" />
+          <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+        </svg>
+      );
+    case "facebook":
+      return (
+        <svg viewBox="0 0 24 24" className={className} {...p}>
+          <path d="M14 21 V13 H17 L17.5 10 H14 V8 C14 7.2 14.4 6.5 15.5 6.5 H17.5 V3.5 C17.5 3.5 16.3 3.3 15.1 3.3 C12.6 3.3 11 4.8 11 7.6 V10 H8.3 V13 H11 V21" />
+        </svg>
+      );
     default:
       return null;
   }
@@ -235,19 +265,17 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
-          <div className="mb-6 text-white/90">
-            <svg width="72" height="72" viewBox="0 0 36 36" fill="none">
-              <circle cx="18" cy="18" r="17" stroke="currentColor" strokeWidth="0.75" opacity="0.5" />
-              <path d="M6 24 L14 12 L18 18 L22 13 L30 24 Z" fill="none" stroke="currentColor" strokeWidth="1.25" strokeLinejoin="round" />
-              <circle cx="24" cy="10" r="1.5" fill="#C68B59" />
-            </svg>
+          <div className="mb-6 h-24 w-24 overflow-hidden">
+            <img
+              src={logo}
+              alt=""
+              className="h-full w-full origin-top scale-[1.6] object-contain drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]"
+            />
           </div>
-          <h1 className="font-display text-6xl lowercase tracking-tight md:text-8xl">
-            hotel alpi-in
-          </h1>
+          <h1 className="font-display text-6xl tracking-tight md:text-8xl">Hotel alpi.in</h1>
           <p className="eyebrow mt-4 text-white/85">Arta Terme · Carnia · Friuli Venezia Giulia</p>
           <p className="mt-8 max-w-xl text-lg font-light leading-relaxed text-white/95 md:text-xl">
-            La montagna attiva, con lo Zoncolan alle spalle e i boschi davanti alla porta.
+            Nel cuore delle Alpi Carniche, l'avventura inizia qui
           </p>
           <button className="btn-cta mt-10" onClick={() => goTo("camere", true)}>
             Prenota
@@ -259,15 +287,17 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
       <Section>
         <div className="mx-auto max-w-3xl text-center">
           <p className="eyebrow text-muted-foreground">Benvenuti</p>
-          <h2 className="mt-4 font-display text-4xl lowercase md:text-5xl">
-            la tua base per le alpi carniche
+          <h2 className="mt-4 font-display text-4xl md:text-5xl">
+            La tua base per le Alpi Carniche
           </h2>
           <div className="mx-auto mt-6 h-px w-16 bg-cta" />
           <p className="mt-8 text-lg font-light leading-relaxed text-muted-foreground">
-            Ad Arta Terme, tra le pieghe più autentiche della Carnia, l'Hotel Alpi-In è il
-            punto di partenza ideale per chi cerca la montagna vera. I boschi iniziano a
-            pochi passi dall'ingresso, il Monte Zoncolan si staglia all'orizzonte e la sala
-            deposito attrezzata custodisce sci e biciclette in totale sicurezza.
+            Benvenuti all'Hotel alpi.in di Arta Terme, la vostra base strategica nel cuore delle
+            Alpi Carniche. Situato a pochi passi dal centro del paese ma affacciato direttamente
+            sulla quiete del bosco, la nostra struttura è il punto di partenza perfetto per chi ama
+            la montagna vissuta al massimo. Con una vista spettacolare sullo Zoncolan, un deposito
+            attrezzato per i vostri sci o biciclette e tariffe sempre convenienti, la vostra
+            prossima grande avventura in Carnia inizia qui.
           </p>
           <p className="mt-4 text-lg font-light leading-relaxed text-muted-foreground">
             Un rifugio contemporaneo, con tariffe oneste e un'accoglienza che sa di casa.
@@ -278,27 +308,52 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
       {/* L'HOTEL */}
       <Section className="bg-secondary/40">
         <div className="mx-auto max-w-6xl">
-          <div className="grid gap-12 md:grid-cols-2 md:items-center">
-            <div>
-              <p className="eyebrow text-cta">L'Hotel</p>
-              <h2 className="mt-3 font-display text-4xl lowercase leading-tight md:text-5xl">
-                spazi caldi,<br />sapori sinceri
-              </h2>
-              <div className="mt-6 space-y-4 text-muted-foreground">
-                <p>Camere singole, doppie e triple per chi viaggia in coppia o da solo.</p>
-                <p>Quadruple e dormitori fino a otto letti per famiglie, squadre e gruppi.</p>
-                <p>Legno di larice, lino naturale e vedute che aprono sulle vette.</p>
-                <p>Una colazione locale con pane appena sfornato, formaggi di malga e miele di montagna.</p>
-                <p>Ogni dettaglio pensato per chi scende dai sentieri o dalle piste.</p>
-              </div>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="eyebrow text-cta">L'Hotel</p>
+            <h2 className="mt-3 font-display text-4xl leading-tight md:text-5xl">
+              Spazi caldi,
+              <br />
+              sapori sinceri
+            </h2>
+            <div className="mt-6 space-y-4 text-muted-foreground">
+              <p>Camere singole, doppie e triple per chi viaggia in coppia o da solo.</p>
+              <p>Quadruple e dormitori fino a otto letti per famiglie, squadre e gruppi.</p>
+              <p>Legno di larice, lino naturale e vedute che aprono sulle vette.</p>
+              <p>
+                Una colazione locale con pane appena sfornato, formaggi di malga e miele di
+                montagna.
+              </p>
+              <p>Ogni dettaglio pensato per chi scende dai sentieri o dalle piste.</p>
             </div>
-            <div className="grid grid-cols-6 grid-rows-6 gap-3 aspect-square">
-              <img src={hotelInterior} alt="Interni hotel" width={1280} height={1280} loading="lazy" className="col-span-4 row-span-4 h-full w-full object-cover" />
-              <img src={room} alt="Camera" width={1280} height={1280} loading="lazy" className="col-span-2 row-span-3 h-full w-full object-cover" />
-              <img src={breakfast} alt="Colazione" width={1280} height={1280} loading="lazy" className="col-span-2 row-span-3 h-full w-full object-cover" />
-              <img src={village} alt="Arta Terme" width={1280} height={1280} loading="lazy" className="col-span-3 row-span-2 h-full w-full object-cover" />
-              <img src={zoncolan} alt="Zoncolan" width={1920} height={1080} loading="lazy" className="col-span-3 row-span-2 h-full w-full object-cover" />
-            </div>
+          </div>
+          <Carousel opts={{ align: "start", loop: true }} className="mt-12 px-10">
+            <CarouselContent>
+              {[
+                { src: lounge, alt: "Salone interno" },
+                { src: roomSingola, alt: "Camera" },
+                { src: breakfastTable, alt: "Colazione" },
+                { src: gardenMountain, alt: "Giardino e vista sulle montagne" },
+                { src: windowView, alt: "Vista dalla camera" },
+              ].map((img) => (
+                <CarouselItem key={img.alt} className="basis-full md:basis-1/3">
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    width={1280}
+                    height={1280}
+                    loading="lazy"
+                    className="aspect-square h-full w-full object-cover"
+                  />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious className="left-0" />
+            <CarouselNext className="right-0" />
+          </Carousel>
+          <div className="mt-10 text-center">
+            <button className="btn-cta" onClick={() => goTo("camere")}>
+              Scopri le nostre camere
+            </button>
           </div>
         </div>
       </Section>
@@ -308,12 +363,14 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
             <p className="eyebrow text-muted-foreground">Il Territorio</p>
-            <h2 className="mt-4 font-display text-4xl lowercase md:text-5xl">
-              un unico centro,<br />mille avventure
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">
+              Un unico centro,
+              <br />
+              mille avventure
             </h2>
             <p className="mt-6 text-muted-foreground">
-              Sport all'aria aperta, terme, cucina di montagna. Da Alpi-In raggiungi in poche
-              curve tutto ciò che la Carnia ha da offrire.
+              Sport all'aria aperta, terme, cucina di montagna. Da alpi.in raggiungi in poche curve
+              tutto ciò che la Carnia ha da offrire.
             </p>
           </div>
 
@@ -321,9 +378,16 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
             {[
               { name: "Sci", icon: "ski", text: "Piste dello Zoncolan e Ravascletto a 20 minuti." },
               { name: "Bici", icon: "bike", text: "Salite mitiche e ciclabili panoramiche." },
-              { name: "Trekking", icon: "trek", text: "Sentieri che partono dal bosco dell'hotel." },
+              {
+                name: "Trekking",
+                icon: "trek",
+                text: "Sentieri che partono dal bosco dell'hotel.",
+              },
             ].map((c) => (
-              <div key={c.name} className="group flex flex-col items-center border border-border bg-card px-8 py-12 text-center transition hover:border-cta">
+              <div
+                key={c.name}
+                className="group flex flex-col items-center border border-border bg-card px-8 py-12 text-center transition hover:border-cta"
+              >
                 <div className="text-forest transition group-hover:text-cta">
                   <Icon name={c.icon} className="h-12 w-12" />
                 </div>
@@ -347,12 +411,48 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
 /* ---------------------------- CAMERE ---------------------------- */
 
 const ROOMS = [
-  { name: "Singola", beds: 1, price: 55, text: "Compatta, luminosa, perfetta per il viaggiatore solitario o di lavoro." },
-  { name: "Doppia", beds: 2, price: 75, text: "Letto matrimoniale o due singoli, vista sui boschi." },
-  { name: "Tripla", beds: 3, price: 95, text: "Spaziosa e versatile, ideale per amici in trasferta sportiva." },
-  { name: "Quadrupla", beds: 4, price: 120, text: "Pensata per famiglie: comfort, ordine e tante finestre." },
-  { name: "Dormitorio 7 letti", beds: 7, price: 32, text: "Per gruppi sportivi e team: letti robusti, armadietti privati." },
-  { name: "Dormitorio 8 letti", beds: 8, price: 30, text: "La soluzione più conveniente per grandi gruppi ed escursioni." },
+  {
+    name: "Singola",
+    beds: 1,
+    price: 55,
+    text: "Compatta, luminosa, per viaggiatore solitario/lavoro.",
+    image: roomSingola,
+  },
+  {
+    name: "Doppia",
+    beds: 2,
+    price: 75,
+    text: "Letto matrimoniale o due singoli, vista boschi.",
+    image: roomDoppia,
+  },
+  {
+    name: "Tripla",
+    beds: 3,
+    price: 95,
+    text: "Spaziosa, per amici in trasferta sportiva.",
+    image: roomTripla,
+  },
+  {
+    name: "Quadrupla",
+    beds: 4,
+    price: 120,
+    text: "Per famiglie.",
+    image: roomQuadrupla,
+  },
+  {
+    name: "Dormitorio 7 letti",
+    beds: 7,
+    price: 32,
+    text: "Per gruppi sportivi/team.",
+    image: roomDormitorio7,
+  },
+  {
+    name: "Dormitorio 8 letti",
+    beds: 8,
+    price: 30,
+    text: "Per grandi gruppi.",
+    image: roomDormitorio8,
+  },
 ];
 
 function Camere({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }) {
@@ -366,23 +466,45 @@ function Camere({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }
           <div className="grid gap-12 md:grid-cols-2 md:items-center">
             <div>
               <p className="eyebrow text-cta">Le Camere</p>
-              <h2 className="mt-3 font-display text-4xl lowercase leading-tight md:text-5xl">
-                riposo su misura,<br />per ogni viaggio
+              <h2 className="mt-3 font-display text-4xl leading-tight md:text-5xl">
+                Riposo su misura,
+                <br />
+                per ogni viaggio
               </h2>
               <p className="mt-6 text-muted-foreground">
                 Dalle singole intime ai dormitori da otto letti: sei tipologie di camera per
-                accogliere coppie, famiglie, squadre e viaggiatori individuali. Bagno privato
-                in ogni stanza, Wi-Fi gratuito e materassi pensati per chi in montagna cammina
-                davvero.
+                accogliere coppie, famiglie, squadre e viaggiatori individuali. Bagno privato in
+                ogni stanza, Wi-Fi gratuito e materassi pensati per chi in montagna cammina davvero.
               </p>
               <button className="btn-cta mt-8" onClick={scrollToForm}>
                 Richiedi informazioni
               </button>
             </div>
             <div className="grid grid-cols-3 gap-3">
-              <img src={room} alt="" width={1280} height={1280} loading="lazy" className="col-span-2 row-span-2 aspect-square h-full w-full object-cover" />
-              <img src={hotelInterior} alt="" width={1280} height={1280} loading="lazy" className="aspect-square h-full w-full object-cover" />
-              <img src={breakfast} alt="" width={1280} height={1280} loading="lazy" className="aspect-square h-full w-full object-cover" />
+              <img
+                src={roomSingola}
+                alt=""
+                width={1280}
+                height={1280}
+                loading="lazy"
+                className="col-span-2 row-span-2 aspect-square h-full w-full object-cover"
+              />
+              <img
+                src={lounge}
+                alt=""
+                width={1280}
+                height={1280}
+                loading="lazy"
+                className="aspect-square h-full w-full object-cover"
+              />
+              <img
+                src={breakfastTable}
+                alt=""
+                width={1280}
+                height={1280}
+                loading="lazy"
+                className="aspect-square h-full w-full object-cover"
+              />
             </div>
           </div>
         </div>
@@ -391,27 +513,37 @@ function Camere({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }
       {/* ROOMS GRID */}
       <Section className="bg-secondary/40">
         <div className="mx-auto max-w-6xl">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="eyebrow text-muted-foreground">Tipologie</p>
-            <h2 className="mt-4 font-display text-4xl lowercase md:text-5xl">
-              sei modi di dormire in montagna
-            </h2>
-          </div>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {ROOMS.map((r) => (
-              <div key={r.name} className="flex aspect-square flex-col justify-between border border-border bg-card p-7 transition hover:border-cta hover:shadow-lg">
-                <div>
-                  <div className="flex flex-wrap gap-2">
-                    <Badge icon="bed" label={`${r.beds} ${r.beds === 1 ? "letto" : "letti"}`} />
-                    <Badge icon="bath" label="Bagno" />
-                    <Badge icon="wifi" label="Wi-Fi" />
+              <div
+                key={r.name}
+                className="flex flex-col overflow-hidden border border-border bg-card transition hover:border-cta hover:shadow-lg"
+              >
+                <img
+                  src={r.image}
+                  alt={r.name}
+                  width={800}
+                  height={600}
+                  loading="lazy"
+                  className="aspect-[4/3] w-full object-cover"
+                />
+                <div className="flex flex-1 flex-col justify-between p-7">
+                  <div>
+                    <div className="flex flex-wrap gap-2">
+                      <Badge icon="bed" label={`${r.beds} ${r.beds === 1 ? "letto" : "letti"}`} />
+                      <Badge icon="bath" label="Bagno" />
+                      <Badge icon="wifi" label="Wi-Fi" />
+                    </div>
+                    <h3 className="mt-6 font-display text-2xl text-forest">{r.name}</h3>
+                    <p className="mt-3 text-sm text-muted-foreground">{r.text}</p>
                   </div>
-                  <h3 className="mt-6 font-display text-2xl lowercase text-forest">{r.name}</h3>
-                  <p className="mt-3 text-sm text-muted-foreground">{r.text}</p>
-                </div>
-                <div className="mt-6 border-t border-border pt-4">
-                  <div className="eyebrow text-muted-foreground text-[10px]">A partire da</div>
-                  <div className="mt-1 font-display text-2xl text-cta">€{r.price}<span className="text-sm text-muted-foreground"> / notte</span></div>
+                  <div className="mt-6 border-t border-border pt-4">
+                    <div className="eyebrow text-muted-foreground text-[10px]">A partire da</div>
+                    <div className="mt-1 font-display text-2xl text-cta">
+                      €{r.price}
+                      <span className="text-sm text-muted-foreground"> / notte</span>
+                    </div>
+                  </div>
                 </div>
               </div>
             ))}
@@ -430,7 +562,9 @@ function Camere({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }
               { icon: "meeting", label: "Sala riunioni aziendali" },
             ].map((p) => (
               <div key={p.label} className="flex flex-col items-center text-center">
-                <div className="text-cta"><Icon name={p.icon} className="h-9 w-9" /></div>
+                <div className="text-cta">
+                  <Icon name={p.icon} className="h-9 w-9" />
+                </div>
                 <div className="eyebrow mt-4 text-forest">{p.label}</div>
               </div>
             ))}
@@ -444,8 +578,8 @@ function Camere({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }
           <div className="mx-auto max-w-2xl">
             <div className="text-center">
               <p className="eyebrow text-cta">Prenota</p>
-              <h2 className="mt-3 font-display text-4xl lowercase md:text-5xl">
-                scrivici, ti rispondiamo presto
+              <h2 className="mt-3 font-display text-4xl md:text-5xl">
+                Scrivici, ti risponderemo presto
               </h2>
               <p className="mt-4 text-forest-foreground/80">
                 Dicci quando vorresti venire e cosa cerchi: costruiamo insieme il tuo soggiorno.
@@ -466,7 +600,9 @@ function Camere({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }
               </div>
               <Field label="Messaggio / Richiesta" name="msg" textarea />
               <div className="pt-2 text-center">
-                <button type="submit" className="btn-cta">Invia richiesta</button>
+                <button type="submit" className="btn-cta">
+                  Invia richiesta
+                </button>
               </div>
             </form>
           </div>
@@ -515,16 +651,23 @@ function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
   return (
     <>
       <section className="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
-        <img src={zoncolan} alt="Monte Zoncolan" width={1920} height={1080} className="absolute inset-0 h-full w-full object-cover" />
+        <img
+          src={zoncolan}
+          alt="Monte Zoncolan"
+          width={1920}
+          height={1080}
+          className="absolute inset-0 h-full w-full object-cover"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
           <h1 className="eyebrow text-white/90 text-sm">Il Territorio</h1>
-          <h2 className="mt-4 font-display text-5xl uppercase tracking-wider md:text-7xl">
-            LA CARNIA<br />A PORTATA DI MANO
+          <h2 className="mt-4 font-display text-5xl tracking-wider md:text-7xl">
+            La Carnia
+            <br />a portata di mano
           </h2>
           <p className="mt-6 max-w-2xl text-lg font-light text-white/90">
-            Dalla quiete dei boschi alle sfide dello Zoncolan: vivi la montagna attiva
-            partendo dalla nostra base strategica.
+            Dalla quiete dei boschi alle sfide dello Zoncolan: vivi la montagna attiva partendo
+            dalla nostra base strategica.
           </p>
         </div>
       </section>
@@ -534,25 +677,33 @@ function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
         <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center">
           <div>
             <p className="eyebrow text-cta">Arta Terme</p>
-            <h2 className="mt-3 font-display text-4xl lowercase md:text-5xl">
-              un borgo che si visita<br />a piedi
+            <h2 className="mt-3 font-display text-4xl md:text-5xl">
+              Un borgo che si visita
+              <br />a piedi
             </h2>
             <div className="mt-6 space-y-4 text-muted-foreground">
               <p>
-                Le terme di Arta, celebri fin dall'Ottocento, sono a cinque minuti a piedi.
-                L'acqua sulfurea salsobromoiodica ti aspetta dopo una giornata sui sentieri.
+                Le terme di Arta, celebri fin dall'Ottocento, sono a cinque minuti a piedi. L'acqua
+                sulfurea salsobromoiodica ti aspetta dopo una giornata sui sentieri.
               </p>
               <p>
-                Nelle vie del centro trovi trattorie storiche e osterie dove si mangia con
-                pochi euro cucina friulana autentica: frico, cjarsons, gubana.
+                Nelle vie del centro trovi trattorie storiche e osterie dove si mangia con pochi
+                euro cucina friulana autentica: frico, cjarsons, gubana.
               </p>
               <p>
-                Parcheggia una volta all'hotel e lascia l'auto lì: tutto il paese è
-                raggiungibile in una passeggiata.
+                Parcheggia una volta all'hotel e lascia l'auto lì: tutto il paese è raggiungibile in
+                una passeggiata.
               </p>
             </div>
           </div>
-          <img src={village} alt="Arta Terme" width={1280} height={1280} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+          <img
+            src={village}
+            alt="Arta Terme"
+            width={1280}
+            height={1280}
+            loading="lazy"
+            className="aspect-[4/5] w-full object-cover"
+          />
         </div>
       </Section>
 
@@ -579,8 +730,10 @@ function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
         <div className="mx-auto max-w-6xl">
           <div className="mx-auto max-w-2xl text-center">
             <p className="eyebrow text-muted-foreground">Cosa fare</p>
-            <h2 className="mt-4 font-display text-4xl lowercase md:text-5xl">
-              la tua base strategica<br />per un territorio unico
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">
+              La tua base strategica
+              <br />
+              per un territorio unico
             </h2>
           </div>
           <div className="mt-12 grid gap-6 md:grid-cols-3">
@@ -601,9 +754,14 @@ function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
                 text: "Malghe di alta quota, cjarsons di pasta ripiena, formaggi stagionati nel latte e leggende raccontate da chi la montagna la vive da sempre.",
               },
             ].map((c) => (
-              <div key={c.title} className="border border-border bg-card p-8 transition hover:border-cta">
-                <div className="text-cta"><Icon name={c.icon} className="h-10 w-10" /></div>
-                <h3 className="mt-5 font-display text-xl lowercase text-forest">{c.title}</h3>
+              <div
+                key={c.title}
+                className="border border-border bg-card p-8 transition hover:border-cta"
+              >
+                <div className="text-cta">
+                  <Icon name={c.icon} className="h-10 w-10" />
+                </div>
+                <h3 className="mt-5 font-display text-xl text-forest">{c.title}</h3>
                 <p className="mt-3 text-sm text-muted-foreground">{c.text}</p>
               </div>
             ))}
@@ -622,16 +780,32 @@ function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
           <div className="grid gap-8 md:grid-cols-3 md:items-center">
             <div>
               <p className="eyebrow text-cta">Dove siamo</p>
-              <h2 className="mt-3 font-display text-3xl lowercase">
-                via fontana 21,<br />arta terme
+              <h2 className="mt-3 font-display text-3xl">
+                via fontana 21,
+                <br />
+                arta terme
               </h2>
               <div className="mt-6 space-y-2 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2"><Icon name="pin" className="h-4 w-4 text-cta" /> 33022 Arta Terme (UD)</div>
-                <div className="flex items-center gap-2"><Icon name="ski" className="h-4 w-4 text-cta" /> 20 min dallo Zoncolan</div>
-                <div className="flex items-center gap-2"><Icon name="parking" className="h-4 w-4 text-cta" /> 15 min dall'autostrada A23</div>
+                <div className="flex items-center gap-2">
+                  <Icon name="pin" className="h-4 w-4 text-cta" /> 33022 Arta Terme (UD)
+                </div>
+                <div className="flex items-center gap-2">
+                  <Icon name="ski" className="h-4 w-4 text-cta" /> 20 min dallo Zoncolan
+                </div>
+                <div className="flex items-center gap-2">
+                  <Icon name="parking" className="h-4 w-4 text-cta" /> 15 min dall'autostrada A23
+                </div>
               </div>
             </div>
-            <MockMap />
+            <div className="relative col-span-2 aspect-[16/10] w-full overflow-hidden border border-border">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5495.434851714841!2d13.02394427675014!3d46.47410486549224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x477a1de4a6db50ed%3A0xd4e4504327d295dd!2sVia%20Fontana%2C%2021%2C%2033022%20Arta%20Terme%20UD!5e0!3m2!1sit!2sit!4v1784562271014!5m2!1sit!2sit"
+                className="h-full w-full border-0"
+                loading="lazy"
+                referrerPolicy="strict-origin-when-cross-origin"
+                title="Mappa - Hotel alpi.in, Via Fontana 21, Arta Terme"
+              />
+            </div>
           </div>
         </div>
       </Section>
@@ -639,52 +813,26 @@ function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
   );
 }
 
-function ActivityBox({ icon, title, text, callout }: { icon: string; title: string; text: string; callout: string }) {
+function ActivityBox({
+  icon,
+  title,
+  text,
+  callout,
+}: {
+  icon: string;
+  title: string;
+  text: string;
+  callout: string;
+}) {
   return (
     <div className="flex flex-col border border-border bg-card p-8 md:p-10">
-      <div className="text-cta"><Icon name={icon} className="h-12 w-12" /></div>
-      <h3 className="mt-6 font-display text-2xl lowercase text-forest">{title}</h3>
+      <div className="text-cta">
+        <Icon name={icon} className="h-12 w-12" />
+      </div>
+      <h3 className="mt-6 font-display text-2xl text-forest">{title}</h3>
       <p className="mt-4 text-muted-foreground">{text}</p>
       <div className="mt-6 border-l-2 border-cta bg-cta/5 px-5 py-4 text-sm italic text-forest">
         {callout}
-      </div>
-    </div>
-  );
-}
-
-function MockMap() {
-  return (
-    <div className="relative col-span-2 aspect-[16/10] w-full overflow-hidden border border-border bg-[oklch(0.95_0.01_150)]">
-      <svg viewBox="0 0 800 500" className="h-full w-full">
-        <defs>
-          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
-            <path d="M 40 0 L 0 0 0 40" fill="none" stroke="oklch(0.88 0.01 150)" strokeWidth="0.5" />
-          </pattern>
-        </defs>
-        <rect width="800" height="500" fill="url(#grid)" />
-        {/* Rivers */}
-        <path d="M0 300 Q 200 260 400 300 T 800 320" fill="none" stroke="oklch(0.75 0.05 220)" strokeWidth="4" opacity="0.6" />
-        {/* Mountain shapes */}
-        <path d="M100 400 L200 200 L280 320 L350 180 L450 380 Z" fill="oklch(0.85 0.02 150)" opacity="0.6" />
-        <path d="M500 400 L600 220 L680 340 L750 240 L800 400 Z" fill="oklch(0.85 0.02 150)" opacity="0.6" />
-        {/* Roads */}
-        <path d="M0 380 Q 200 350 400 380 T 800 400" fill="none" stroke="oklch(0.7 0.02 60)" strokeWidth="2" strokeDasharray="6 4" />
-        {/* Pin */}
-        <g transform="translate(400 260)">
-          <circle r="30" fill="oklch(0.66 0.11 55 / 0.2)" />
-          <circle r="15" fill="oklch(0.66 0.11 55 / 0.3)" />
-          <circle r="7" fill="oklch(0.66 0.11 55)" />
-          <text y="-25" textAnchor="middle" fill="oklch(0.32 0.05 155)" fontSize="14" fontFamily="Montserrat" fontWeight="600" letterSpacing="1.5">
-            HOTEL ALPI-IN
-          </text>
-        </g>
-        {/* Labels */}
-        <text x="620" y="200" fill="oklch(0.45 0.02 150)" fontSize="11" fontFamily="Montserrat" letterSpacing="1.5">ZONCOLAN</text>
-        <text x="180" y="180" fill="oklch(0.45 0.02 150)" fontSize="11" fontFamily="Montserrat" letterSpacing="1.5">CARNIA</text>
-        <text x="20" y="420" fill="oklch(0.55 0.02 60)" fontSize="10" fontFamily="Montserrat" letterSpacing="1.5">A23 ← UDINE</text>
-      </svg>
-      <div className="absolute bottom-3 right-3 bg-background/90 px-3 py-1.5 text-[10px] uppercase tracking-wider text-muted-foreground">
-        Via Fontana 21 · Arta Terme
       </div>
     </div>
   );
@@ -696,21 +844,36 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
   const partners = [
     {
       name: "AL CARATEL",
-      subtitle: "Per colazioni lunghe, pranzi veloci, aperitivi o per concludere la serata",
       distance: "10 minuti",
-      highlights: ["Panini gourmet", "Brunch di montagna", "Vini regionali", "Signature cocktails"],
+      image: partnerAlCaratel,
+      instagram: "https://www.instagram.com/alcaratel/",
+      facebook: "https://www.facebook.com/profile.php?id=61580856583078",
+      whatYouFind:
+        "Brunch sfiziosi, i migliori vini della regione, cocktail d'autore e ristorazione veloce di qualità (panini gourmet, toast fatti in casa, primi piatti espressi).",
+      bestMoment:
+        "Perfetto per un pranzo veloce prima di un'escursione, per un brunch rilassato a metà mattina, per un drink post-attività o per concludere la vostra serata.",
     },
     {
       name: "RISTORANTE PRIVILEGIO",
-      subtitle: "La cucina carnica per le tue cene",
       distance: "20 minuti",
-      highlights: ["Ricette locali autentiche", "Sala calda e accogliente", "Ottima tappa post-escursione", "Cantina friulana selezionata"],
+      image: partnerPrivilegio,
+      instagram: "https://www.instagram.com/privilegioristorante/",
+      facebook: "https://www.facebook.com/privilegioristorante/?locale=it_IT",
+      whatYouFind:
+        "Piatti preparati con ingredienti locali e ricette autentiche, in un'atmosfera calda e accogliente.",
+      bestMoment:
+        "La degna conclusione di una giornata intensa tra i sentieri o sulle piste, per gustare i veri sapori della Carnia.",
     },
     {
       name: "RIFUGIO LAUGIANE",
-      subtitle: "Il tuo punto di riferimento sullo Zoncolan",
       distance: "Sulle piste",
-      highlights: ["Ristorante panoramico", "Terrazza sulle vette", "SPA alpina invernale privata", "Sole tutto il giorno"],
+      image: partnerLaugiane,
+      instagram: "https://www.instagram.com/rifugiolaugiane/",
+      facebook: "https://www.facebook.com/Laugiane/?locale=it_IT",
+      whatYouFind:
+        "Bar, ristorante con terrazza panoramica e, durante la stagione invernale, una piccola ed esclusiva SPA (su prenotazione) per rigenerarsi dopo le discese.",
+      bestMoment:
+        "Una pausa pranzo calorosa tra una pista e l'altra o un pomeriggio di puro relax ad alta quota.",
     },
   ];
 
@@ -720,14 +883,15 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
       <Section className="bg-forest text-forest-foreground">
         <div className="mx-auto max-w-4xl text-center">
           <p className="eyebrow text-cta">Servizi Extra & Retreat</p>
-          <h2 className="mt-4 font-display text-4xl lowercase md:text-6xl">
-            un unico ecosistema<br />di ospitalità alpina
+          <h2 className="mt-4 font-display text-4xl md:text-6xl">
+            Un unico ecosistema di ospitalità
           </h2>
           <div className="mx-auto mt-6 h-px w-16 bg-cta" />
           <p className="mt-8 text-lg font-light leading-relaxed text-forest-foreground/85">
-            Come ospite di Hotel Alpi-In accedi a una rete di strutture selezionate del
-            gruppo: ristoranti, rifugi e SPA. Sconto esclusivo del <span className="text-cta font-medium">10%</span> in
-            tutti i locali partner, riservato agli ospiti dell'hotel.
+            Come ospite di Hotel alpi.in accedi a una rete di strutture selezionate del gruppo:
+            ristoranti, rifugi e SPA. Sconto esclusivo del{" "}
+            <span className="text-cta font-medium">10%</span> in tutti i locali partner, riservato
+            agli ospiti dell'hotel.
           </p>
         </div>
       </Section>
@@ -743,23 +907,50 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
               }`}
             >
               <div className="md:col-span-1">
-                <div className="eyebrow text-cta">Partner {i + 1}</div>
-                <h3 className="mt-2 font-display text-3xl">{p.name}</h3>
-                <div className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
-                  <Icon name="pin" className="h-4 w-4 text-cta" /> {p.distance}
-                </div>
+                <img
+                  src={p.image}
+                  alt={p.name}
+                  width={800}
+                  height={1000}
+                  loading="lazy"
+                  className="aspect-[4/5] w-full object-cover"
+                />
               </div>
               <div className="md:col-span-2">
-                <p className="text-lg font-light italic text-forest">{p.subtitle}</p>
-                <div className="mt-6 grid grid-cols-2 gap-3">
-                  {p.highlights.map((h) => (
-                    <div key={h} className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <span className="h-1 w-1 rounded-full bg-cta" /> {h}
-                    </div>
-                  ))}
+                <div className="eyebrow text-cta">Partner {i + 1}</div>
+                <h3 className="mt-2 font-display text-3xl">{p.name}</h3>
+                <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
+                  <span className="flex items-center gap-2">
+                    <Icon name="pin" className="h-4 w-4 text-cta" /> {p.distance}
+                  </span>
+                  <a
+                    href={p.instagram}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 transition hover:text-cta"
+                  >
+                    <Icon name="instagram" className="h-4 w-4 text-cta" /> Instagram
+                  </a>
+                  <a
+                    href={p.facebook}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 transition hover:text-cta"
+                  >
+                    <Icon name="facebook" className="h-4 w-4 text-cta" /> Facebook
+                  </a>
+                </div>
+                <div className="mt-6 space-y-3 text-muted-foreground">
+                  <p>
+                    <span className="font-medium text-forest">Cosa trovi:</span> {p.whatYouFind}
+                  </p>
+                  <p>
+                    <span className="font-medium text-forest">Il momento ideale:</span>{" "}
+                    {p.bestMoment}
+                  </p>
                 </div>
                 <div className="mt-6 inline-flex items-center border border-cta/40 bg-cta/5 px-3 py-1 text-xs uppercase tracking-wider text-cta">
-                  -10% per gli ospiti Alpi-In
+                  -10% per gli ospiti alpi.in
                 </div>
               </div>
             </div>
@@ -771,35 +962,52 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
       <Section className="bg-secondary/40">
         <div className="mx-auto max-w-6xl">
           <div className="grid gap-12 md:grid-cols-2 md:items-center">
-            <img src={hotelInterior} alt="Sala meeting" width={1280} height={1280} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+            <img
+              src={conferenceRoom}
+              alt="Sala meeting"
+              width={1280}
+              height={1280}
+              loading="lazy"
+              className="aspect-[4/5] w-full object-cover"
+            />
             <div>
               <p className="eyebrow text-cta">Corporate Retreat</p>
-              <h2 className="mt-3 font-display text-4xl lowercase leading-tight md:text-5xl">
-                il tuo retreat aziendale<br />nel cuore della carnia
+              <h2 className="mt-3 font-display text-4xl leading-tight md:text-5xl">
+                Il tuo retreat aziendale
+                <br />
+                nel cuore della carnia
               </h2>
               <div className="mt-6 space-y-4 text-muted-foreground">
                 <p>
-                  Quindici minuti dall'uscita autostradale, sala riunioni attrezzata con
-                  proiettore, lavagna e connessione fibra dedicata.
+                  Quindici minuti dall'uscita autostradale, sala riunioni attrezzata con proiettore,
+                  lavagna e connessione fibra dedicata.
                 </p>
                 <p>
-                  Configurazioni flessibili delle camere per accogliere team fino a 40 persone,
-                  in singole, doppie o dormitori a seconda del budget.
+                  Configurazioni flessibili delle camere per accogliere team fino a 40 persone, in
+                  singole, doppie o dormitori a seconda del budget.
                 </p>
                 <p>
                   Team building alpini coordinati con guide di montagna esperte: escursioni,
                   arrampicata sportiva, canyoning e cene in malga.
                 </p>
                 <p>
-                  Chiusura di giornata alle terme di Arta, a cinque minuti a piedi: sauna,
-                  vapore e piscine termali per rigenerarsi prima del ritorno.
+                  Chiusura di giornata alle terme di Arta, a cinque minuti a piedi: sauna, vapore e
+                  piscine termali per rigenerarsi prima del ritorno.
                 </p>
               </div>
               <div className="mt-8 flex flex-wrap gap-3">
-                <div className="border border-forest/20 px-3 py-2 text-xs uppercase tracking-wider text-forest">A23 · 15 min</div>
-                <div className="border border-forest/20 px-3 py-2 text-xs uppercase tracking-wider text-forest">Fino a 40 pax</div>
-                <div className="border border-forest/20 px-3 py-2 text-xs uppercase tracking-wider text-forest">Sala meeting</div>
-                <div className="border border-forest/20 px-3 py-2 text-xs uppercase tracking-wider text-forest">Team building</div>
+                <div className="border border-forest/20 px-3 py-2 text-xs uppercase tracking-wider text-forest">
+                  A23 · 15 min
+                </div>
+                <div className="border border-forest/20 px-3 py-2 text-xs uppercase tracking-wider text-forest">
+                  Fino a 40 pax
+                </div>
+                <div className="border border-forest/20 px-3 py-2 text-xs uppercase tracking-wider text-forest">
+                  Sala meeting
+                </div>
+                <div className="border border-forest/20 px-3 py-2 text-xs uppercase tracking-wider text-forest">
+                  Team building
+                </div>
               </div>
             </div>
           </div>
@@ -809,12 +1017,14 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
       {/* FUNNEL FOOTER */}
       <Section>
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-display text-4xl lowercase md:text-5xl">
-            pronto a scendere<br />dalle piste con noi?
+          <h2 className="font-display text-4xl md:text-5xl">
+            Pronto a scendere
+            <br />
+            dalle piste con noi?
           </h2>
           <p className="mt-6 text-muted-foreground">
-            Scrivici le tue date e cosa cerchi. Costruiamo il soggiorno intorno a te — che sia
-            una fuga individuale, una vacanza in famiglia o un retreat aziendale.
+            Scrivici le tue date e cosa cerchi. Costruiamo il soggiorno intorno a te — che sia una
+            fuga individuale, una vacanza in famiglia o un retreat aziendale.
           </p>
           <button className="btn-cta mt-8" onClick={() => goTo("camere", true)}>
             Prenota
@@ -837,8 +1047,14 @@ function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
-            <Logo />
-            <div className="font-display text-xl lowercase">alpi-in</div>
+            <div className="h-12 w-12 overflow-hidden">
+              <img
+                src={logo}
+                alt=""
+                className="h-full w-full origin-top scale-[1.6] object-contain brightness-0 invert"
+              />
+            </div>
+            <div className="font-display text-xl lowercase">alpi.in</div>
           </div>
           <p className="mt-4 text-sm text-forest-foreground/70">
             La tua base per le Alpi Carniche. Arta Terme, Friuli Venezia Giulia.
@@ -847,26 +1063,33 @@ function Footer() {
         <div>
           <div className="eyebrow text-cta">Indirizzo</div>
           <div className="mt-3 text-sm text-forest-foreground/80">
-            Via Fontana 21<br />33022 Arta Terme (UD)<br />Italia
+            Via Fontana 21
+            <br />
+            33022 Arta Terme (UD)
+            <br />
+            Italia
           </div>
         </div>
         <div>
           <div className="eyebrow text-cta">Contatti</div>
           <div className="mt-3 text-sm text-forest-foreground/80">
-            info@alpi-in.it<br />+39 0433 000 000
+            info@alpi.in
+            <br />
+            +39 0433 000 000
           </div>
         </div>
         <div>
           <div className="eyebrow text-cta">Segui</div>
           <div className="mt-3 text-sm text-forest-foreground/80">
-            Instagram<br />Facebook
+            Instagram
+            <br />
+            Facebook
           </div>
         </div>
       </div>
       <div className="border-t border-white/10 py-6 text-center text-xs uppercase tracking-wider text-forest-foreground/50">
-        © 2026 Hotel Alpi-In · Prototipo di design
+        © 2026 Hotel alpi.in · Prototipo di design
       </div>
     </footer>
   );
 }
-

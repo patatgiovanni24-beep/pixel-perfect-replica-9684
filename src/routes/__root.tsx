@@ -77,13 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Hotel Alpi-In — La tua base per le Alpi Carniche" },
+      { title: "Hotel alpi.in — La tua base per le Alpi Carniche" },
       {
         name: "description",
         content:
-          "Hotel Alpi-In ad Arta Terme, Carnia. Base strategica per sci, bici e trekking sullo Zoncolan. Camere, dormitori, deposito attrezzato e colazione locale.",
+          "Hotel alpi.in ad Arta Terme, Carnia. Base strategica per sci, bici e trekking sullo Zoncolan. Camere, dormitori, deposito attrezzato e colazione locale.",
       },
-      { property: "og:title", content: "Hotel Alpi-In — Arta Terme, Carnia" },
+      { property: "og:title", content: "Hotel alpi.in — Arta Terme, Carnia" },
       {
         property: "og:description",
         content:
