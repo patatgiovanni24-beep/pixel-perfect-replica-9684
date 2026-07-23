@@ -50,7 +50,7 @@
   --muted-foreground: oklch(0.5 0.005 250); /* #6E6E6E */
   --accent: oklch(0.9 0.02 60);
   --accent-foreground: oklch(0.32 0.05 155);
-  --cta: oklch(0.66 0.11 55); /* #C68B59 terracotta */
+  --cta: #e69a33; /* #E69A33 orange */
   --cta-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.98 0 0);

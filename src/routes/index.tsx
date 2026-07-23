@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState } from "react";
-import heroMountain from "@/assets/hero-mountain.jpg";
+import heroEntrance from "@/assets/hero-entrance.jpg";
 import zoncolan from "@/assets/zoncolan.jpg";
 import village from "@/assets/village.jpg";
 import logo from "@/assets/logo.svg";
@@ -18,6 +18,8 @@ import conferenceRoom from "@/assets/conference-room.jpg";
 import partnerAlCaratel from "@/assets/partner-al-caratel.jpg";
 import partnerPrivilegio from "@/assets/partner-privilegio.jpg";
 import partnerLaugiane from "@/assets/partner-laugiane.jpg";
+import activitySki from "@/assets/activity-ski.jpg";
+import activityBike from "@/assets/activity-bike.jpg";
 import {
   Carousel,
   CarouselContent,
@@ -257,8 +259,8 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
       {/* HERO */}
       <section className="relative h-[92vh] min-h-[600px] w-full overflow-hidden">
         <img
-          src={heroMountain}
-          alt="Le Alpi Carniche"
+          src={heroEntrance}
+          alt="Ingresso Hotel alpi.in"
           width={1920}
           height={1280}
           className="absolute inset-0 h-full w-full object-cover"
@@ -632,14 +634,14 @@ function Field({
   textarea?: boolean;
 }) {
   const cls =
-    "w-full border-0 border-b border-forest-foreground/30 bg-transparent px-0 py-3 text-forest-foreground placeholder:text-forest-foreground/50 focus:border-cta focus:outline-none transition";
+    "w-full rounded-md border-0 bg-white px-4 py-3 text-forest placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-cta transition";
   return (
     <label className="block">
       <span className="eyebrow text-forest-foreground/70">{label}</span>
       {textarea ? (
-        <textarea name={name} rows={4} className={cls + " mt-1 resize-none"} required />
+        <textarea name={name} rows={4} className={cls + " mt-2 resize-none"} required />
       ) : (
-        <input name={name} type={type} className={cls + " mt-1"} required />
+        <input name={name} type={type} className={cls + " mt-2"} required />
       )}
     </label>
   );
@@ -648,6 +650,21 @@ function Field({
 /* ---------------------------- TERRITORIO ---------------------------- */
 
 function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
+  const activities = [
+    {
+      name: "Piste da sci",
+      title: "Sulle piste dello Zoncolan",
+      image: activitySki,
+      text: "Venti minuti d'auto e sei ai piedi degli impianti di Ravascletto-Zoncolan. Piste per ogni livello, panorami che tolgono il fiato e scuola sci convenzionata a tariffe dedicate agli ospiti dell'hotel. Scarponi e sci caldi e asciutti nella nostra ski room, pronti per il giorno dopo.",
+    },
+    {
+      name: "In bici",
+      title: "In bici sullo Zoncolan",
+      image: activityBike,
+      text: "Una delle salite più iconiche del ciclismo mondiale parte a pochi chilometri. Percorsi da gran fondo, sentieri MTB tecnici e ciclabili panoramiche per chi pedala per piacere. Al rientro, la tua bici è al sicuro nel nostro deposito gratuito.",
+    },
+  ];
+
   return (
     <>
       <section className="relative h-[70vh] min-h-[500px] w-full overflow-hidden">
@@ -709,19 +726,30 @@ function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
 
       {/* ACTIVITY SPLITS */}
       <Section className="bg-secondary/40">
-        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2">
-          <ActivityBox
-            icon="ski"
-            title="Sulle piste dello Zoncolan"
-            text="Venti minuti d'auto e sei ai piedi degli impianti di Ravascletto-Zoncolan. Piste per ogni livello, panorami che tolgono il fiato e scuola sci convenzionata a tariffe dedicate agli ospiti dell'hotel."
-            callout="Scarponi e sci caldi e asciutti nella nostra ski room, pronti per il giorno dopo."
-          />
-          <ActivityBox
-            icon="bike"
-            title="In bici sullo Zoncolan"
-            text="Una delle salite più iconiche del ciclismo mondiale parte a pochi chilometri. Percorsi da gran fondo, sentieri MTB tecnici e ciclabili panoramiche per chi pedala per piacere."
-            callout="Al rientro, la tua bici è al sicuro nel nostro deposito gratuito."
-          />
+        <div className="mx-auto max-w-6xl space-y-8">
+          {activities.map((a, i) => (
+            <div
+              key={a.name}
+              className={`grid gap-8 border border-border bg-card p-8 md:grid-cols-3 md:p-12 ${
+                i % 2 === 1 ? "md:[&>div:first-child]:order-2" : ""
+              }`}
+            >
+              <div className="md:col-span-1">
+                <img
+                  src={a.image}
+                  alt={a.title}
+                  width={800}
+                  height={1000}
+                  loading="lazy"
+                  className="aspect-[4/5] w-full object-cover"
+                />
+              </div>
+              <div className="md:col-span-2 flex flex-col justify-center">
+                <h3 className="font-display text-3xl text-forest">{a.title}</h3>
+                <p className="mt-4 text-muted-foreground">{a.text}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </Section>
 
@@ -813,31 +841,6 @@ function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
   );
 }
 
-function ActivityBox({
-  icon,
-  title,
-  text,
-  callout,
-}: {
-  icon: string;
-  title: string;
-  text: string;
-  callout: string;
-}) {
-  return (
-    <div className="flex flex-col border border-border bg-card p-8 md:p-10">
-      <div className="text-cta">
-        <Icon name={icon} className="h-12 w-12" />
-      </div>
-      <h3 className="mt-6 font-display text-2xl text-forest">{title}</h3>
-      <p className="mt-4 text-muted-foreground">{text}</p>
-      <div className="mt-6 border-l-2 border-cta bg-cta/5 px-5 py-4 text-sm italic text-forest">
-        {callout}
-      </div>
-    </div>
-  );
-}
-
 /* ---------------------------- EXTRA ---------------------------- */
 
 function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
@@ -845,6 +848,7 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
     {
       name: "AL CARATEL",
       distance: "10 minuti",
+      mapsUrl: "https://maps.app.goo.gl/GkfvT5h2fxbvx4KH9",
       image: partnerAlCaratel,
       instagram: "https://www.instagram.com/alcaratel/",
       facebook: "https://www.facebook.com/profile.php?id=61580856583078",
@@ -856,6 +860,7 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
     {
       name: "RISTORANTE PRIVILEGIO",
       distance: "20 minuti",
+      mapsUrl: "https://maps.app.goo.gl/ecoXzfQ4qsPhxtWt7",
       image: partnerPrivilegio,
       instagram: "https://www.instagram.com/privilegioristorante/",
       facebook: "https://www.facebook.com/privilegioristorante/?locale=it_IT",
@@ -867,6 +872,7 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
     {
       name: "RIFUGIO LAUGIANE",
       distance: "Sulle piste",
+      mapsUrl: "https://maps.app.goo.gl/qkjBkwB9D6moTXji9",
       image: partnerLaugiane,
       instagram: "https://www.instagram.com/rifugiolaugiane/",
       facebook: "https://www.facebook.com/Laugiane/?locale=it_IT",
@@ -920,9 +926,14 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
                 <div className="eyebrow text-cta">Partner {i + 1}</div>
                 <h3 className="mt-2 font-display text-3xl">{p.name}</h3>
                 <div className="mt-3 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-muted-foreground">
-                  <span className="flex items-center gap-2">
+                  <a
+                    href={p.mapsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 transition hover:text-cta"
+                  >
                     <Icon name="pin" className="h-4 w-4 text-cta" /> {p.distance}
-                  </span>
+                  </a>
                   <a
                     href={p.instagram}
                     target="_blank"
@@ -1044,7 +1055,7 @@ function Section({ children, className = "" }: { children: React.ReactNode; clas
 function Footer() {
   return (
     <footer className="bg-forest text-forest-foreground">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-4">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-3">
         <div>
           <div className="flex items-center gap-3">
             <div className="h-12 w-12 overflow-hidden">
@@ -1076,14 +1087,6 @@ function Footer() {
             info@alpi.in
             <br />
             +39 0433 000 000
-          </div>
-        </div>
-        <div>
-          <div className="eyebrow text-cta">Segui</div>
-          <div className="mt-3 text-sm text-forest-foreground/80">
-            Instagram
-            <br />
-            Facebook
           </div>
         </div>
       </div>
