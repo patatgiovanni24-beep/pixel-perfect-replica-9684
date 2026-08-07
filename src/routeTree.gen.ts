@@ -10,33 +10,92 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ItRouteImport } from './routes/it'
+import { Route as ItIndexRouteImport } from './routes/it/index'
+import { Route as ItCamereRouteImport } from './routes/it/camere'
+import { Route as ItServiziExtraRetreatRouteImport } from './routes/it/servizi-extra-retreat'
+import { Route as ItTerritorioRouteImport } from './routes/it/territorio'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ItRoute = ItRouteImport.update({
+  id: '/it',
+  path: '/it',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItIndexRoute = ItIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ItRoute,
+} as any)
+const ItCamereRoute = ItCamereRouteImport.update({
+  id: '/camere',
+  path: '/camere',
+  getParentRoute: () => ItRoute,
+} as any)
+const ItServiziExtraRetreatRoute = ItServiziExtraRetreatRouteImport.update({
+  id: '/servizi-extra-retreat',
+  path: '/servizi-extra-retreat',
+  getParentRoute: () => ItRoute,
+} as any)
+const ItTerritorioRoute = ItTerritorioRouteImport.update({
+  id: '/territorio',
+  path: '/territorio',
+  getParentRoute: () => ItRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/it': typeof ItRouteWithChildren
+  '/it/camere': typeof ItCamereRoute
+  '/it/servizi-extra-retreat': typeof ItServiziExtraRetreatRoute
+  '/it/territorio': typeof ItTerritorioRoute
+  '/it/': typeof ItIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/it/camere': typeof ItCamereRoute
+  '/it/servizi-extra-retreat': typeof ItServiziExtraRetreatRoute
+  '/it/territorio': typeof ItTerritorioRoute
+  '/it': typeof ItIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/it': typeof ItRouteWithChildren
+  '/it/camere': typeof ItCamereRoute
+  '/it/servizi-extra-retreat': typeof ItServiziExtraRetreatRoute
+  '/it/territorio': typeof ItTerritorioRoute
+  '/it/': typeof ItIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/it'
+    | '/it/camere'
+    | '/it/servizi-extra-retreat'
+    | '/it/territorio'
+    | '/it/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    '/' | '/it/camere' | '/it/servizi-extra-retreat' | '/it/territorio' | '/it'
+  id:
+    | '__root__'
+    | '/'
+    | '/it'
+    | '/it/camere'
+    | '/it/servizi-extra-retreat'
+    | '/it/territorio'
+    | '/it/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ItRoute: typeof ItRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +107,63 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/it': {
+      id: '/it'
+      path: '/it'
+      fullPath: '/it'
+      preLoaderRoute: typeof ItRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/it/': {
+      id: '/it/'
+      path: '/'
+      fullPath: '/it/'
+      preLoaderRoute: typeof ItIndexRouteImport
+      parentRoute: typeof ItRoute
+    }
+    '/it/camere': {
+      id: '/it/camere'
+      path: '/camere'
+      fullPath: '/it/camere'
+      preLoaderRoute: typeof ItCamereRouteImport
+      parentRoute: typeof ItRoute
+    }
+    '/it/servizi-extra-retreat': {
+      id: '/it/servizi-extra-retreat'
+      path: '/servizi-extra-retreat'
+      fullPath: '/it/servizi-extra-retreat'
+      preLoaderRoute: typeof ItServiziExtraRetreatRouteImport
+      parentRoute: typeof ItRoute
+    }
+    '/it/territorio': {
+      id: '/it/territorio'
+      path: '/territorio'
+      fullPath: '/it/territorio'
+      preLoaderRoute: typeof ItTerritorioRouteImport
+      parentRoute: typeof ItRoute
+    }
   }
 }
 
+interface ItRouteChildren {
+  ItCamereRoute: typeof ItCamereRoute
+  ItServiziExtraRetreatRoute: typeof ItServiziExtraRetreatRoute
+  ItTerritorioRoute: typeof ItTerritorioRoute
+  ItIndexRoute: typeof ItIndexRoute
+}
+
+const ItRouteChildren: ItRouteChildren = {
+  ItCamereRoute: ItCamereRoute,
+  ItServiziExtraRetreatRoute: ItServiziExtraRetreatRoute,
+  ItTerritorioRoute: ItTerritorioRoute,
+  ItIndexRoute: ItIndexRoute,
+}
+
+const ItRouteWithChildren = ItRoute._addFileChildren(ItRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ItRoute: ItRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
