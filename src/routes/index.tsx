@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import heroEntrance from "@/assets/hero-entrance.jpg";
 import zoncolan from "@/assets/zoncolan.jpg";
 import village from "@/assets/village.jpg";
@@ -26,7 +26,14 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -225,6 +232,15 @@ function Icon({ name, className = "h-6 w-6" }: { name: string; className?: strin
           <path d="M3 20 C3 16 6 14 9 14 C12 14 15 16 15 20 M15 20 C15 17 17 15.5 19 15.5 C20.5 15.5 21 16 21 17" />
         </svg>
       );
+    case "spa":
+      return (
+        <svg viewBox="0 0 24 24" className={className} {...p}>
+          <path d="M4 16 C4 16 6 14 6 11 C6 8 4 7 4 7" />
+          <path d="M12 16 C12 16 14 13 14 9 C14 5 12 3 12 3" />
+          <path d="M20 16 C20 16 22 14 22 11 C22 8 20 7 20 7" />
+          <path d="M2 20 H22" />
+        </svg>
+      );
     case "pin":
       return (
         <svg viewBox="0 0 24 24" className={className} {...p}>
@@ -253,7 +269,73 @@ function Icon({ name, className = "h-6 w-6" }: { name: string; className?: strin
 
 /* ---------------------------- HOME ---------------------------- */
 
+const REVIEWS = [
+  {
+    name: "Francesco M.",
+    rating: 5,
+    text: "Posizione strategica, estrema cordialità dello staff, tranquillità e pulizia della struttura.",
+  },
+  {
+    name: "Paola D.",
+    rating: 4,
+    text: "Consigliatissimo! Camera matrimoniale spaziosa e pulita, bagno comodo. Personale molto gentile e accogliente. Colazione a buffet ottima e abbondante.",
+  },
+  {
+    name: "Kent C.",
+    rating: 5,
+    text: "Buono per amanti della montagna e dello sport. Consigliato.",
+  },
+  {
+    name: "Vincenzo P.",
+    rating: 5,
+    text: "Assolutamente consigliato per posizione e servizi prestati.",
+  },
+  {
+    name: "Nicla O.",
+    rating: 4,
+    text: "Struttura accogliente e conveniente. Camere grandi e accoglienti, buona posizione per trekking sullo Zoncolan.",
+  },
+  {
+    name: "Marco F.",
+    rating: 5,
+    text: "Staff gentile e servizi completi. Abbiamo cenato in uno dei partner convenzionati di cucina tipica.",
+  },
+];
+
+function Stars({ rating }: { rating: number }) {
+  return (
+    <div className="flex gap-1 text-cta" aria-label={`${rating} su 5 stelle`}>
+      {Array.from({ length: 5 }, (_, i) => (
+        <svg
+          key={i}
+          viewBox="0 0 24 24"
+          className="h-4 w-4"
+          fill={i < rating ? "currentColor" : "none"}
+          stroke="currentColor"
+          strokeWidth="1.5"
+        >
+          <path
+            d="M12 2 L14.9 8.6 L22 9.3 L16.7 14.1 L18.2 21.2 L12 17.6 L5.8 21.2 L7.3 14.1 L2 9.3 L9.1 8.6 Z"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
 function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
+  const [reviewsApi, setReviewsApi] = useState<CarouselApi>();
+  const reviewsPaused = useRef(false);
+
+  useEffect(() => {
+    if (!reviewsApi) return;
+    const interval = setInterval(() => {
+      if (!reviewsPaused.current) reviewsApi.scrollNext();
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [reviewsApi]);
+
   return (
     <>
       {/* HERO */}
@@ -267,14 +349,13 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/60" />
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
-          <div className="mb-6 h-24 w-24 overflow-hidden">
+          <div className="mb-6 h-40 w-40 overflow-hidden md:h-56 md:w-56">
             <img
               src={logo}
-              alt=""
+              alt="Hotel alpi.in"
               className="h-full w-full origin-top scale-[1.6] object-contain drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]"
             />
           </div>
-          <h1 className="font-display text-6xl tracking-tight md:text-8xl">Hotel alpi.in</h1>
           <p className="eyebrow mt-4 text-white/85">Arta Terme · Carnia · Friuli Venezia Giulia</p>
           <p className="mt-8 max-w-xl text-lg font-light leading-relaxed text-white/95 md:text-xl">
             Nel cuore delle Alpi Carniche, l'avventura inizia qui
@@ -302,7 +383,7 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
             prossima grande avventura in Carnia inizia qui.
           </p>
           <p className="mt-4 text-lg font-light leading-relaxed text-muted-foreground">
-            Un rifugio contemporaneo, con tariffe oneste e un'accoglienza che sa di casa.
+            Un rifugio contemporaneo, con tariffe convenienti e un'accoglienza che sa di casa.
           </p>
         </div>
       </Section>
@@ -313,19 +394,22 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
           <div className="mx-auto max-w-3xl text-center">
             <p className="eyebrow text-cta">L'Hotel</p>
             <h2 className="mt-3 font-display text-4xl leading-tight md:text-5xl">
-              Spazi caldi,
+              L'inizio della tua
               <br />
-              sapori sinceri
+              avventura in Carnia
             </h2>
             <div className="mt-6 space-y-4 text-muted-foreground">
               <p>Camere singole, doppie e triple per chi viaggia in coppia o da solo.</p>
               <p>Quadruple e dormitori fino a otto letti per famiglie, squadre e gruppi.</p>
-              <p>Legno di larice, lino naturale e vedute che aprono sulle vette.</p>
+              <p>Legno di larice e vedute che aprono sulle vette.</p>
               <p>
-                Una colazione locale con pane appena sfornato, formaggi di malga e miele di
-                montagna.
+                Una colazione abbondante, un ampio parcheggio e un deposito sicuro per lasciare la
+                vostra attrezzatura.
               </p>
-              <p>Ogni dettaglio pensato per chi scende dai sentieri o dalle piste.</p>
+              <p>
+                Ogni dettaglio pensato per chi scende dai sentieri, dalle piste o per chi vuole
+                rilassarsi nelle vicine terme di Arta.
+              </p>
             </div>
           </div>
           <Carousel opts={{ align: "start", loop: true }} className="mt-12 px-10">
@@ -336,6 +420,7 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
                 { src: breakfastTable, alt: "Colazione" },
                 { src: gardenMountain, alt: "Giardino e vista sulle montagne" },
                 { src: windowView, alt: "Vista dalla camera" },
+                { src: roomDoppia, alt: "Camera doppia" },
               ].map((img) => (
                 <CarouselItem key={img.alt} className="basis-full md:basis-1/3">
                   <img
@@ -376,14 +461,19 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
             </p>
           </div>
 
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <div className="mt-14 grid gap-6 sm:grid-cols-2 md:grid-cols-4">
             {[
               { name: "Sci", icon: "ski", text: "Piste dello Zoncolan e Ravascletto a 20 minuti." },
               { name: "Bici", icon: "bike", text: "Salite mitiche e ciclabili panoramiche." },
               {
                 name: "Trekking",
                 icon: "trek",
-                text: "Sentieri che partono dal bosco dell'hotel.",
+                text: "Sentieri che partono dal bosco dietro l'hotel.",
+              },
+              {
+                name: "Terme di Arta",
+                icon: "spa",
+                text: "Il centro termale che fa bene a corpo e spirito.",
               },
             ].map((c) => (
               <div
@@ -406,6 +496,42 @@ function Home({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
           </div>
         </div>
       </Section>
+
+      {/* REVIEWS */}
+      <Section className="bg-secondary/40">
+        <div className="mx-auto max-w-6xl">
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="eyebrow text-muted-foreground">Cosa dicono di noi</p>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">Le parole dei nostri ospiti</h2>
+          </div>
+          <div
+            onMouseEnter={() => (reviewsPaused.current = true)}
+            onMouseLeave={() => (reviewsPaused.current = false)}
+          >
+            <Carousel
+              opts={{ align: "start", loop: true }}
+              setApi={setReviewsApi}
+              className="mt-12 px-10"
+            >
+              <CarouselContent>
+                {REVIEWS.map((r) => (
+                  <CarouselItem key={r.name} className="basis-full sm:basis-1/2 md:basis-1/3">
+                    <div className="flex h-full flex-col justify-between border border-border bg-card p-8">
+                      <div>
+                        <Stars rating={r.rating} />
+                        <p className="mt-4 text-muted-foreground">&ldquo;{r.text}&rdquo;</p>
+                      </div>
+                      <div className="mt-6 font-display text-lg text-forest">{r.name}</div>
+                    </div>
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+              <CarouselPrevious className="left-0" />
+              <CarouselNext className="right-0" />
+            </Carousel>
+          </div>
+        </div>
+      </Section>
     </>
   );
 }
@@ -421,7 +547,7 @@ const ROOMS = [
     image: roomSingola,
   },
   {
-    name: "Doppia",
+    name: "Matrimoniale",
     beds: 2,
     price: 75,
     text: "Letto matrimoniale o due singoli, vista boschi.",
@@ -445,7 +571,7 @@ const ROOMS = [
     name: "Dormitorio 7 letti",
     beds: 7,
     price: 32,
-    text: "Per gruppi sportivi/team.",
+    text: "Per gruppi sportivi/squadre.",
     image: roomDormitorio7,
   },
   {
@@ -454,6 +580,34 @@ const ROOMS = [
     price: 30,
     text: "Per grandi gruppi.",
     image: roomDormitorio8,
+  },
+];
+
+const FAQS = [
+  {
+    question: "Quali sono gli orari di Check-in e Check-out?",
+    answer:
+      "Il check-in è disponibile dalle 15 alle 20, mentre il check-out va effettuato entro le ore 11.",
+  },
+  {
+    question: "Cosa è incluso nel soggiorno in camera?",
+    answer:
+      "Tutte le nostre camere includono una ricca colazione a buffet, connessione Wi-Fi, TV, kit di cortesia, asciugacapelli e riscaldamento autonomo. È incluso anche l'accesso al deposito sci/bici.",
+  },
+  {
+    question: "Qual è la politica di cancellazione e modifica della prenotazione?",
+    answer:
+      "È possibile cancellare o modificare gratuitamente una prenotazione fino a 14 giorni prima del check-in, dai 14 ai 7 giorni prima della data di arrivo, il rimborso sarà pari al 50% dell'importo pagato. Dal 7° giorno antecedente la data di arrivo invece, non è previsto alcun rimborso.",
+  },
+  {
+    question: "Gli animali domestici sono ammessi nelle camere?",
+    answer:
+      "Sì, i vostri amici a quattro zampe sono i benvenuti! Accettiamo animali in specifiche camere dedicate (è richiesto un piccolo supplemento giornaliero di 10€ per la sanificazione extra). Vi preghiamo di segnalare la loro presenza al momento della prenotazione.",
+  },
+  {
+    question: "Ci sono camere accessibili, familiari o comunicanti?",
+    answer:
+      "Disponiamo di ampie Suite Familiari e di camere comunicanti perfette per chi viaggia con i bambini. Ci sono anche due dormitori, da 7 e 8 posti ciascuno, perfetti per gruppi o squadre. Inoltre, la struttura offre camere interamente accessibili e prive di barriere architettoniche per ospiti con disabilità o mobilità ridotta. Contattaci per scegliere la sistemazione più adatta alle tue esigenze.",
   },
 ];
 
@@ -484,7 +638,7 @@ function Camere({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }
             </div>
             <div className="grid grid-cols-3 gap-3">
               <img
-                src={roomSingola}
+                src={roomDoppia}
                 alt=""
                 width={1280}
                 height={1280}
@@ -550,6 +704,26 @@ function Camere({ formRef }: { formRef: React.RefObject<HTMLDivElement | null> }
               </div>
             ))}
           </div>
+        </div>
+      </Section>
+
+      {/* FAQ */}
+      <Section>
+        <div className="mx-auto max-w-3xl">
+          <div className="text-center">
+            <p className="eyebrow text-muted-foreground">Domande frequenti</p>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">Tutto quello che devi sapere</h2>
+          </div>
+          <Accordion type="single" collapsible className="mt-12">
+            {FAQS.map((f, i) => (
+              <AccordionItem key={i} value={`faq-${i}`}>
+                <AccordionTrigger className="font-display text-lg text-forest hover:no-underline">
+                  {f.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">{f.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </Section>
 
@@ -649,13 +823,105 @@ function Field({
 
 /* ---------------------------- TERRITORIO ---------------------------- */
 
+const TERRITORIO_FAQS = [
+  {
+    question:
+      "Quanto dista l'hotel dalle Terme di Arta e quali servizi offre la struttura termale?",
+    answer: (
+      <p>
+        L'hotel dista solo 2 minuti in auto e 10 minuti a piedi dallo stabilimento delle Terme di
+        Arta, famoso per le sue acque solfato-calcio-magnesiache. È la destinazione perfetta per una
+        giornata di relax tra piscina coperta, idromassaggio, sauna e trattamenti benessere. Chiedi
+        in reception per informazioni su orari e convenzioni.
+      </p>
+    ),
+  },
+  {
+    question:
+      "Come si raggiunge l'hotel? Avete indicazioni per chi viaggia in auto o con i mezzi pubblici?",
+    answer: (
+      <p>
+        Siamo facilmente raggiungibili in auto tramite Autostrada A23 uscita Tolmezzo. Per chi
+        viaggia in treno, la stazione ferroviaria più vicina è quella di Stazione Carnia, collegata
+        all'hotel tramite autobus di linea o servizio taxi.
+      </p>
+    ),
+  },
+  {
+    question: "Avete un deposito sicuro per attrezzatura sportiva?",
+    answer: (
+      <p>
+        Sì, mettiamo a disposizione dei nostri ospiti un deposito sicuro e coperto per sci e
+        scarponi durante l'inverno, e un bike storage protetto per biciclette e e-bike durante la
+        bella stagione.
+      </p>
+    ),
+  },
+  {
+    question:
+      "Quali sono i principali percorsi di trekking, piste da sci o itinerari ciclabili nei dintorni?",
+    answer: (
+      <div className="space-y-3">
+        <p>
+          Arta Terme è il punto di partenza ideale per esplorare la natura della Carnia, combinando
+          sport ed energia con il relax delle nostre terme:
+        </p>
+        <p>
+          <span className="font-medium text-forest">In bicicletta:</span> dai grandi miti del
+          ciclismo su strada come la leggendaria scalata del Monte Zoncolan e gli anelli panoramici
+          della Val Pesarina, fino ai percorsi rilassanti in e-bike lungo la Ciclovia del
+          Tagliamento.
+        </p>
+        <p>
+          <span className="font-medium text-forest">Trekking ed escursioni:</span> un'ampia rete di
+          sentieri per tutti i livelli, dalle passeggiate per famiglie tra le malghe di Ravascletto
+          fino ai trekking sulle creste dello Zoncolan e ai piedi delle Dolomiti Pesarine.
+        </p>
+        <p>
+          <span className="font-medium text-forest">Sci e sport invernali:</span> a soli 15 minuti
+          di auto si trova il polo sciistico Ravascletto-Zoncolan con oltre 28 km di piste da
+          discesa, affiancato dai suggestivi anelli per lo sci di fondo della Val Pesarina.
+        </p>
+        <p>
+          Chiedi in reception per mappe dettagliate, noleggio e-bike o suggerimenti personalizzati
+          per la tua giornata outdoor!
+        </p>
+      </div>
+    ),
+  },
+  {
+    question: "Quanto distano i principali punti di interesse e i borghi della zona?",
+    answer: (
+      <div className="space-y-3">
+        <p>Dall'hotel puoi raggiungere in breve tempo:</p>
+        <ul className="space-y-1.5">
+          {[
+            { name: "Terme di Arta", time: "2 minuti" },
+            { name: "Impianti di risalita / Piste da sci Zoncolan", time: "20 minuti" },
+            { name: "Tolmezzo", time: "10 minuti" },
+            { name: "Lago di Cavazzo", time: "15 minuti" },
+          ].map((d) => (
+            <li
+              key={d.name}
+              className="flex items-center justify-between gap-4 border-b border-border/60 pb-1.5"
+            >
+              <span>{d.name}</span>
+              <span className="whitespace-nowrap font-medium text-forest">{d.time}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ),
+  },
+];
+
 function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
   const activities = [
     {
       name: "Piste da sci",
       title: "Sulle piste dello Zoncolan",
       image: activitySki,
-      text: "Venti minuti d'auto e sei ai piedi degli impianti di Ravascletto-Zoncolan. Piste per ogni livello, panorami che tolgono il fiato e scuola sci convenzionata a tariffe dedicate agli ospiti dell'hotel. Scarponi e sci caldi e asciutti nella nostra ski room, pronti per il giorno dopo.",
+      text: "Venti minuti d'auto e sei ai piedi degli impianti dello Zoncolan. Piste per ogni livello, panorami che tolgono il fiato e scuola sci convenzionata a tariffe dedicate agli ospiti dell'hotel. Scarponi e sci caldi e asciutti nella nostra ski room, pronti per il giorno dopo.",
     },
     {
       name: "In bici",
@@ -769,7 +1035,7 @@ function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
               {
                 icon: "trek",
                 title: "Trekking & Famiglie",
-                text: "Sentieri facili che partono direttamente dai boschi dell'hotel. Passeggiate per bambini, cascate raggiungibili in mezz'ora e picnic tra i larici.",
+                text: "Sentieri facili che partono direttamente dai boschi dietro l'hotel. Passeggiate per bambini, cascate raggiungibili in mezz'ora e picnic tra i larici.",
               },
               {
                 icon: "ski",
@@ -779,7 +1045,7 @@ function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
               {
                 icon: "coffee",
                 title: "Storia & Sapori",
-                text: "Malghe di alta quota, cjarsons di pasta ripiena, formaggi stagionati nel latte e leggende raccontate da chi la montagna la vive da sempre.",
+                text: "Malghe di alta quota, cjarsons, erbe spontanee, formaggi stagionati e leggende raccontate da chi la montagna la vive da sempre.",
               },
             ].map((c) => (
               <div
@@ -799,6 +1065,26 @@ function Territorio({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
               Prenota la tua prossima avventura
             </button>
           </div>
+        </div>
+      </Section>
+
+      {/* FAQ */}
+      <Section>
+        <div className="mx-auto max-w-3xl">
+          <div className="text-center">
+            <p className="eyebrow text-muted-foreground">Domande frequenti</p>
+            <h2 className="mt-4 font-display text-4xl md:text-5xl">Tutto quello che devi sapere</h2>
+          </div>
+          <Accordion type="single" collapsible className="mt-12">
+            {TERRITORIO_FAQS.map((f, i) => (
+              <AccordionItem key={i} value={`territorio-faq-${i}`}>
+                <AccordionTrigger className="font-display text-lg text-forest hover:no-underline">
+                  {f.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">{f.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </Section>
 
@@ -859,7 +1145,7 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
     },
     {
       name: "RISTORANTE PRIVILEGIO",
-      distance: "20 minuti",
+      distance: "15 minuti",
       mapsUrl: "https://maps.app.goo.gl/ecoXzfQ4qsPhxtWt7",
       image: partnerPrivilegio,
       instagram: "https://www.instagram.com/privilegioristorante/",
@@ -894,8 +1180,8 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
           </h2>
           <div className="mx-auto mt-6 h-px w-16 bg-cta" />
           <p className="mt-8 text-lg font-light leading-relaxed text-forest-foreground/85">
-            Come ospite di Hotel alpi.in accedi a una rete di strutture selezionate del gruppo:
-            ristoranti, rifugi e SPA. Sconto esclusivo del{" "}
+            Come ospite di Hotel alpi.in accedi a una rete di strutture selezionate del nostro
+            gruppo: ristoranti, rifugi e SPA. Sconto esclusivo del{" "}
             <span className="text-cta font-medium">10%</span> in tutti i locali partner, riservato
             agli ospiti dell'hotel.
           </p>
@@ -991,10 +1277,10 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
               <div className="mt-6 space-y-4 text-muted-foreground">
                 <p>
                   Quindici minuti dall'uscita autostradale, sala riunioni attrezzata con proiettore,
-                  lavagna e connessione fibra dedicata.
+                  lavagna e connessione.
                 </p>
                 <p>
-                  Configurazioni flessibili delle camere per accogliere team fino a 40 persone, in
+                  Configurazioni flessibili delle camere per accogliere team fino a 50 persone, in
                   singole, doppie o dormitori a seconda del budget.
                 </p>
                 <p>
@@ -1002,7 +1288,7 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
                   arrampicata sportiva, canyoning e cene in malga.
                 </p>
                 <p>
-                  Chiusura di giornata alle terme di Arta, a cinque minuti a piedi: sauna, vapore e
+                  Chiusura di giornata alle terme di Arta, a dieci minuti a piedi: sauna, vapore e
                   piscine termali per rigenerarsi prima del ritorno.
                 </p>
               </div>
@@ -1011,7 +1297,7 @@ function Extra({ goTo }: { goTo: (t: TabId, s?: boolean) => void }) {
                   A23 · 15 min
                 </div>
                 <div className="border border-forest/20 px-3 py-2 text-xs uppercase tracking-wider text-forest">
-                  Fino a 40 pax
+                  Fino a 50 pax
                 </div>
                 <div className="border border-forest/20 px-3 py-2 text-xs uppercase tracking-wider text-forest">
                   Sala meeting
@@ -1073,20 +1359,29 @@ function Footer() {
         </div>
         <div>
           <div className="eyebrow text-cta">Indirizzo</div>
-          <div className="mt-3 text-sm text-forest-foreground/80">
+          <a
+            href="https://maps.app.goo.gl/UrmPyctK41ErK63V7"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 block text-sm text-forest-foreground/80 transition hover:text-cta"
+          >
             Via Fontana 21
             <br />
             33022 Arta Terme (UD)
             <br />
             Italia
-          </div>
+          </a>
         </div>
         <div>
           <div className="eyebrow text-cta">Contatti</div>
           <div className="mt-3 text-sm text-forest-foreground/80">
-            info@alpi.in
+            <a href="mailto:info@alpi.in" className="transition hover:text-cta">
+              info@alpi.in
+            </a>
             <br />
-            +39 0433 000 000
+            <a href="tel:+393773749820" className="transition hover:text-cta">
+              +39 377 374 9820
+            </a>
           </div>
         </div>
       </div>
