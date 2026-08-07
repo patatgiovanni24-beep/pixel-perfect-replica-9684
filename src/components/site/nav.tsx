@@ -1,28 +1,30 @@
 import { useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import logo from "@/assets/logo.svg";
+import { PAGE_PATHS, pageKeyFromPath, type Locale, type PageKey } from "@/lib/i18n";
+import type { NavContent } from "@/content/types";
 
-const TABS = [
-  { to: "/it", label: "Home" },
-  { to: "/it/camere", label: "Le Camere" },
-  { to: "/it/territorio", label: "Il Territorio" },
-  { to: "/it/servizi-extra-retreat", label: "Servizi Extra & Retreat" },
-];
+const ORDER: PageKey[] = ["home", "camere", "territorio", "extra"];
 
-export function Nav() {
+export function Nav({ locale, content }: { locale: Locale; content: NavContent }) {
   const [open, setOpen] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const currentKey = pageKeyFromPath(pathname);
 
-  const isActive = (to: string) =>
-    to === "/it" ? pathname === "/it" || pathname === "/it/" : pathname.startsWith(to);
+  const labels: Record<PageKey, string> = {
+    home: content.home,
+    camere: content.camere,
+    territorio: content.territorio,
+    extra: content.extra,
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-forest text-forest-foreground">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link
-          to="/it"
+          to={PAGE_PATHS.home[locale]}
           className="flex items-center gap-3 text-left"
-          aria-label="Hotel alpi.in home"
+          aria-label={content.homeAriaLabel}
         >
           <div className="h-11 w-11 overflow-hidden">
             <img
@@ -38,23 +40,27 @@ export function Nav() {
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
-          {TABS.map((t) => (
+          {ORDER.map((key) => (
             <Link
-              key={t.to}
-              to={t.to}
+              key={key}
+              to={PAGE_PATHS[key][locale]}
               className={`eyebrow relative py-2 transition ${
-                isActive(t.to) ? "opacity-100" : "opacity-70 hover:opacity-100"
+                currentKey === key ? "opacity-100" : "opacity-70 hover:opacity-100"
               }`}
             >
-              {t.label}
-              {isActive(t.to) && (
+              {labels[key]}
+              {currentKey === key && (
                 <span className="absolute -bottom-0.5 left-0 h-0.5 w-full bg-cta" />
               )}
             </Link>
           ))}
         </nav>
 
-        <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Toggle menu">
+        <button
+          className="md:hidden"
+          onClick={() => setOpen(!open)}
+          aria-label={content.toggleMenuAriaLabel}
+        >
           <svg
             width="24"
             height="24"
@@ -69,16 +75,16 @@ export function Nav() {
       </div>
       {open && (
         <div className="border-t border-white/10 md:hidden">
-          {TABS.map((t) => (
+          {ORDER.map((key) => (
             <Link
-              key={t.to}
-              to={t.to}
+              key={key}
+              to={PAGE_PATHS[key][locale]}
               onClick={() => setOpen(false)}
               className={`eyebrow block w-full px-6 py-4 text-left ${
-                isActive(t.to) ? "bg-white/5 text-cta" : ""
+                currentKey === key ? "bg-white/5 text-cta" : ""
               }`}
             >
-              {t.label}
+              {labels[key]}
             </Link>
           ))}
         </div>

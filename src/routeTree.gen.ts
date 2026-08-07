@@ -10,7 +10,17 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as DeRouteImport } from './routes/de'
+import { Route as EnRouteImport } from './routes/en'
 import { Route as ItRouteImport } from './routes/it'
+import { Route as DeIndexRouteImport } from './routes/de/index'
+import { Route as DeExtrasRetreatRouteImport } from './routes/de/extras-retreat'
+import { Route as DeUmgebungRouteImport } from './routes/de/umgebung'
+import { Route as DeZimmerRouteImport } from './routes/de/zimmer'
+import { Route as EnIndexRouteImport } from './routes/en/index'
+import { Route as EnExtrasRetreatRouteImport } from './routes/en/extras-retreat'
+import { Route as EnRoomsRouteImport } from './routes/en/rooms'
+import { Route as EnTheAreaRouteImport } from './routes/en/the-area'
 import { Route as ItIndexRouteImport } from './routes/it/index'
 import { Route as ItCamereRouteImport } from './routes/it/camere'
 import { Route as ItServiziExtraRetreatRouteImport } from './routes/it/servizi-extra-retreat'
@@ -21,10 +31,60 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DeRoute = DeRouteImport.update({
+  id: '/de',
+  path: '/de',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EnRoute = EnRouteImport.update({
+  id: '/en',
+  path: '/en',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ItRoute = ItRouteImport.update({
   id: '/it',
   path: '/it',
   getParentRoute: () => rootRouteImport,
+} as any)
+const DeIndexRoute = DeIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => DeRoute,
+} as any)
+const DeExtrasRetreatRoute = DeExtrasRetreatRouteImport.update({
+  id: '/extras-retreat',
+  path: '/extras-retreat',
+  getParentRoute: () => DeRoute,
+} as any)
+const DeUmgebungRoute = DeUmgebungRouteImport.update({
+  id: '/umgebung',
+  path: '/umgebung',
+  getParentRoute: () => DeRoute,
+} as any)
+const DeZimmerRoute = DeZimmerRouteImport.update({
+  id: '/zimmer',
+  path: '/zimmer',
+  getParentRoute: () => DeRoute,
+} as any)
+const EnIndexRoute = EnIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnExtrasRetreatRoute = EnExtrasRetreatRouteImport.update({
+  id: '/extras-retreat',
+  path: '/extras-retreat',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnRoomsRoute = EnRoomsRouteImport.update({
+  id: '/rooms',
+  path: '/rooms',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnTheAreaRoute = EnTheAreaRouteImport.update({
+  id: '/the-area',
+  path: '/the-area',
+  getParentRoute: () => EnRoute,
 } as any)
 const ItIndexRoute = ItIndexRouteImport.update({
   id: '/',
@@ -49,52 +109,114 @@ const ItTerritorioRoute = ItTerritorioRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/de': typeof DeRouteWithChildren
+  '/en': typeof EnRouteWithChildren
   '/it': typeof ItRouteWithChildren
+  '/de/extras-retreat': typeof DeExtrasRetreatRoute
+  '/de/umgebung': typeof DeUmgebungRoute
+  '/de/zimmer': typeof DeZimmerRoute
+  '/en/extras-retreat': typeof EnExtrasRetreatRoute
+  '/en/rooms': typeof EnRoomsRoute
+  '/en/the-area': typeof EnTheAreaRoute
   '/it/camere': typeof ItCamereRoute
   '/it/servizi-extra-retreat': typeof ItServiziExtraRetreatRoute
   '/it/territorio': typeof ItTerritorioRoute
+  '/de/': typeof DeIndexRoute
+  '/en/': typeof EnIndexRoute
   '/it/': typeof ItIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/de/extras-retreat': typeof DeExtrasRetreatRoute
+  '/de/umgebung': typeof DeUmgebungRoute
+  '/de/zimmer': typeof DeZimmerRoute
+  '/en/extras-retreat': typeof EnExtrasRetreatRoute
+  '/en/rooms': typeof EnRoomsRoute
+  '/en/the-area': typeof EnTheAreaRoute
   '/it/camere': typeof ItCamereRoute
   '/it/servizi-extra-retreat': typeof ItServiziExtraRetreatRoute
   '/it/territorio': typeof ItTerritorioRoute
+  '/de': typeof DeIndexRoute
+  '/en': typeof EnIndexRoute
   '/it': typeof ItIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/de': typeof DeRouteWithChildren
+  '/en': typeof EnRouteWithChildren
   '/it': typeof ItRouteWithChildren
+  '/de/extras-retreat': typeof DeExtrasRetreatRoute
+  '/de/umgebung': typeof DeUmgebungRoute
+  '/de/zimmer': typeof DeZimmerRoute
+  '/en/extras-retreat': typeof EnExtrasRetreatRoute
+  '/en/rooms': typeof EnRoomsRoute
+  '/en/the-area': typeof EnTheAreaRoute
   '/it/camere': typeof ItCamereRoute
   '/it/servizi-extra-retreat': typeof ItServiziExtraRetreatRoute
   '/it/territorio': typeof ItTerritorioRoute
+  '/de/': typeof DeIndexRoute
+  '/en/': typeof EnIndexRoute
   '/it/': typeof ItIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/de'
+    | '/en'
     | '/it'
+    | '/de/extras-retreat'
+    | '/de/umgebung'
+    | '/de/zimmer'
+    | '/en/extras-retreat'
+    | '/en/rooms'
+    | '/en/the-area'
     | '/it/camere'
     | '/it/servizi-extra-retreat'
     | '/it/territorio'
+    | '/de/'
+    | '/en/'
     | '/it/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    '/' | '/it/camere' | '/it/servizi-extra-retreat' | '/it/territorio' | '/it'
-  id:
-    | '__root__'
     | '/'
-    | '/it'
+    | '/de/extras-retreat'
+    | '/de/umgebung'
+    | '/de/zimmer'
+    | '/en/extras-retreat'
+    | '/en/rooms'
+    | '/en/the-area'
     | '/it/camere'
     | '/it/servizi-extra-retreat'
     | '/it/territorio'
+    | '/de'
+    | '/en'
+    | '/it'
+  id:
+    | '__root__'
+    | '/'
+    | '/de'
+    | '/en'
+    | '/it'
+    | '/de/extras-retreat'
+    | '/de/umgebung'
+    | '/de/zimmer'
+    | '/en/extras-retreat'
+    | '/en/rooms'
+    | '/en/the-area'
+    | '/it/camere'
+    | '/it/servizi-extra-retreat'
+    | '/it/territorio'
+    | '/de/'
+    | '/en/'
     | '/it/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DeRoute: typeof DeRouteWithChildren
+  EnRoute: typeof EnRouteWithChildren
   ItRoute: typeof ItRouteWithChildren
 }
 
@@ -107,12 +229,82 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/de': {
+      id: '/de'
+      path: '/de'
+      fullPath: '/de'
+      preLoaderRoute: typeof DeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/en': {
+      id: '/en'
+      path: '/en'
+      fullPath: '/en'
+      preLoaderRoute: typeof EnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/it': {
       id: '/it'
       path: '/it'
       fullPath: '/it'
       preLoaderRoute: typeof ItRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/de/': {
+      id: '/de/'
+      path: '/'
+      fullPath: '/de/'
+      preLoaderRoute: typeof DeIndexRouteImport
+      parentRoute: typeof DeRoute
+    }
+    '/de/extras-retreat': {
+      id: '/de/extras-retreat'
+      path: '/extras-retreat'
+      fullPath: '/de/extras-retreat'
+      preLoaderRoute: typeof DeExtrasRetreatRouteImport
+      parentRoute: typeof DeRoute
+    }
+    '/de/umgebung': {
+      id: '/de/umgebung'
+      path: '/umgebung'
+      fullPath: '/de/umgebung'
+      preLoaderRoute: typeof DeUmgebungRouteImport
+      parentRoute: typeof DeRoute
+    }
+    '/de/zimmer': {
+      id: '/de/zimmer'
+      path: '/zimmer'
+      fullPath: '/de/zimmer'
+      preLoaderRoute: typeof DeZimmerRouteImport
+      parentRoute: typeof DeRoute
+    }
+    '/en/': {
+      id: '/en/'
+      path: '/'
+      fullPath: '/en/'
+      preLoaderRoute: typeof EnIndexRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/extras-retreat': {
+      id: '/en/extras-retreat'
+      path: '/extras-retreat'
+      fullPath: '/en/extras-retreat'
+      preLoaderRoute: typeof EnExtrasRetreatRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/rooms': {
+      id: '/en/rooms'
+      path: '/rooms'
+      fullPath: '/en/rooms'
+      preLoaderRoute: typeof EnRoomsRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/the-area': {
+      id: '/en/the-area'
+      path: '/the-area'
+      fullPath: '/en/the-area'
+      preLoaderRoute: typeof EnTheAreaRouteImport
+      parentRoute: typeof EnRoute
     }
     '/it/': {
       id: '/it/'
@@ -145,6 +337,38 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface DeRouteChildren {
+  DeExtrasRetreatRoute: typeof DeExtrasRetreatRoute
+  DeUmgebungRoute: typeof DeUmgebungRoute
+  DeZimmerRoute: typeof DeZimmerRoute
+  DeIndexRoute: typeof DeIndexRoute
+}
+
+const DeRouteChildren: DeRouteChildren = {
+  DeExtrasRetreatRoute: DeExtrasRetreatRoute,
+  DeUmgebungRoute: DeUmgebungRoute,
+  DeZimmerRoute: DeZimmerRoute,
+  DeIndexRoute: DeIndexRoute,
+}
+
+const DeRouteWithChildren = DeRoute._addFileChildren(DeRouteChildren)
+
+interface EnRouteChildren {
+  EnExtrasRetreatRoute: typeof EnExtrasRetreatRoute
+  EnRoomsRoute: typeof EnRoomsRoute
+  EnTheAreaRoute: typeof EnTheAreaRoute
+  EnIndexRoute: typeof EnIndexRoute
+}
+
+const EnRouteChildren: EnRouteChildren = {
+  EnExtrasRetreatRoute: EnExtrasRetreatRoute,
+  EnRoomsRoute: EnRoomsRoute,
+  EnTheAreaRoute: EnTheAreaRoute,
+  EnIndexRoute: EnIndexRoute,
+}
+
+const EnRouteWithChildren = EnRoute._addFileChildren(EnRouteChildren)
+
 interface ItRouteChildren {
   ItCamereRoute: typeof ItCamereRoute
   ItServiziExtraRetreatRoute: typeof ItServiziExtraRetreatRoute
@@ -163,6 +387,8 @@ const ItRouteWithChildren = ItRoute._addFileChildren(ItRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DeRoute: DeRouteWithChildren,
+  EnRoute: EnRouteWithChildren,
   ItRoute: ItRouteWithChildren,
 }
 export const routeTree = rootRouteImport

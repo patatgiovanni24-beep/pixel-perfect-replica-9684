@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { LocaleLayout } from "@/components/site/locale-layout";
 import { hotelSchema } from "@/lib/hotel-schema";
 
-export const Route = createFileRoute("/it")({
+export const Route = createFileRoute("/de")({
   head: () => ({
     meta: [{ "script:ld+json": hotelSchema } as never],
   }),
-  component: () => <LocaleLayout locale="it" />,
+  component: () => <LocaleLayout locale="de" />,
 });

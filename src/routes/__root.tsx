@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useRouterState,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -11,6 +12,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { LOCALES, DEFAULT_LOCALE } from "../lib/i18n";
 
 function NotFoundComponent() {
   return (
@@ -111,8 +113,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const segment = pathname.split("/")[1];
+  const lang = (LOCALES as readonly string[]).includes(segment) ? segment : DEFAULT_LOCALE;
+
   return (
-    <html lang="it">
+    <html lang={lang}>
       <head>
         <HeadContent />
       </head>

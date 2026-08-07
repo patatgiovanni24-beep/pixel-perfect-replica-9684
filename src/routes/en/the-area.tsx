@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ExtraPage } from "@/components/pages/extra-page";
+import { TerritorioPage } from "@/components/pages/territorio-page";
 import { CONTENT } from "@/content";
 import { PAGE_PATHS } from "@/lib/i18n";
 import { SITE_URL } from "@/lib/hotel-schema";
 import { hreflangLinks } from "@/lib/hreflang";
 
-const content = CONTENT.it.extra;
+const content = CONTENT.en.territorio;
 
-export const Route = createFileRoute("/it/servizi-extra-retreat")({
+export const Route = createFileRoute("/en/the-area")({
   head: () => ({
     meta: [
       { title: content.meta.title },
@@ -16,9 +16,9 @@ export const Route = createFileRoute("/it/servizi-extra-retreat")({
       { property: "og:description", content: content.meta.ogDescription },
     ],
     links: [
-      { rel: "canonical", href: `${SITE_URL}${PAGE_PATHS.extra.it}` },
-      ...hreflangLinks("extra"),
+      { rel: "canonical", href: `${SITE_URL}${PAGE_PATHS.territorio.en}` },
+      ...hreflangLinks("territorio"),
     ],
   }),
-  component: () => <ExtraPage locale="it" content={content} />,
+  component: () => <TerritorioPage locale="en" content={content} />,
 });

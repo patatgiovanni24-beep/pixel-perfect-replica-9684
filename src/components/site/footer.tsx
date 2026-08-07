@@ -1,9 +1,17 @@
+import { Link, useRouterState } from "@tanstack/react-router";
 import logo from "@/assets/logo.svg";
+import { LOCALES, PAGE_PATHS, pageKeyFromPath, type Locale } from "@/lib/i18n";
+import type { FooterContent } from "@/content/types";
 
-export function Footer() {
+const LOCALE_LABELS: Record<Locale, string> = { it: "IT", en: "EN", de: "DE" };
+
+export function Footer({ locale, content }: { locale: Locale; content: FooterContent }) {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const currentKey = pageKeyFromPath(pathname) ?? "home";
+
   return (
     <footer className="bg-forest text-forest-foreground">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-3">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-3">
             <div className="h-12 w-12 overflow-hidden">
@@ -15,12 +23,10 @@ export function Footer() {
             </div>
             <div className="font-display text-xl lowercase">alpi.in</div>
           </div>
-          <p className="mt-4 text-sm text-forest-foreground/70">
-            La tua base per le Alpi Carniche. Arta Terme, Friuli Venezia Giulia.
-          </p>
+          <p className="mt-4 text-sm text-forest-foreground/70">{content.tagline}</p>
         </div>
         <div>
-          <div className="eyebrow text-cta">Indirizzo</div>
+          <div className="eyebrow text-cta">{content.addressLabel}</div>
           <a
             href="https://maps.app.goo.gl/UrmPyctK41ErK63V7"
             target="_blank"
@@ -35,7 +41,7 @@ export function Footer() {
           </a>
         </div>
         <div>
-          <div className="eyebrow text-cta">Contatti</div>
+          <div className="eyebrow text-cta">{content.contactsLabel}</div>
           <div className="mt-3 text-sm text-forest-foreground/80">
             <a href="mailto:info@alpi.in" className="transition hover:text-cta">
               info@alpi.in
@@ -46,9 +52,31 @@ export function Footer() {
             </a>
           </div>
         </div>
+        <div>
+          <div className="eyebrow text-cta">{content.languageLabel}</div>
+          <div className="mt-3 flex gap-3 text-sm text-forest-foreground/80">
+            {LOCALES.map((l) => (
+              <Link
+                key={l}
+                to={PAGE_PATHS[currentKey][l]}
+                className={`transition hover:text-cta ${l === locale ? "font-semibold text-cta" : ""}`}
+              >
+                {LOCALE_LABELS[l]}
+              </Link>
+            ))}
+          </div>
+        </div>
       </div>
       <div className="border-t border-white/10 py-6 text-center text-xs uppercase tracking-wider text-forest-foreground/50">
-        © 2026 Hotel alpi.in
+        © 2026 Hotel alpi.in ·{" "}
+        <a
+          href="https://bnbsolutions.it/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="transition hover:text-cta"
+        >
+          {content.designedBy}
+        </a>
       </div>
     </footer>
   );
