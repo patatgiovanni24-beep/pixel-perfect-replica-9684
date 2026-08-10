@@ -15,6 +15,9 @@ export const de: SiteContent = {
     contactsLabel: "Kontakt",
     languageLabel: "Sprache",
     designedBy: "designed by bnbsolutions.it",
+    legalLabel: "Rechtliches",
+    privacyPolicyLabel: "Datenschutzerklärung",
+    cookiePolicyLabel: "Cookie-Richtlinie",
   },
   home: {
     meta: {
@@ -234,7 +237,9 @@ export const de: SiteContent = {
       phone: "Telefonnummer",
       message: "Nachricht / Anfrage",
       submit: "Anfrage senden",
-      successAlert: "Anfrage gesendet! Wir melden uns innerhalb von 24 Stunden bei Ihnen.",
+      successAlert:
+        'Ihr E-Mail-Programm wird mit den bereits ausgefüllten Daten geöffnet: klicken Sie auf "Senden", um die Anfrage abzuschließen.',
+      emailSubject: "Buchungsanfrage von der Website",
     },
   },
   territorio: {

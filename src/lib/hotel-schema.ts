@@ -1,4 +1,4 @@
-export const SITE_URL = "https://hotel-alp-in.levera-ai.com";
+export const SITE_URL = "https://hotelalpi-in.it";
 
 export const hotelSchema = {
   "@context": "https://schema.org",
@@ -9,7 +9,7 @@ export const hotelSchema = {
   url: SITE_URL,
   image: `${SITE_URL}/apple-touch-icon.png`,
   telephone: "+39-377-374-9820",
-  email: "info@alpi.in",
+  email: "info@hotelalpi-in.it",
   priceRange: "€30–€120",
   address: {
     "@type": "PostalAddress",

@@ -1,0 +1,27 @@
+# Hotel alpi.in
+
+> Hotel in Arta Terme, Carnia (Friuli Venezia Giulia, Italy), at the foot of
+> Mount Zoncolan. Rooms, dorms, ski/bike storage and local breakfast — a base
+> for skiing, cycling and hiking in the Carnic Alps.
+
+Hotel alpi.in offers 6 room types (single, double, triple, quad, and 7- or
+8-bed dorms), from EUR 30 to EUR 120 per night, breakfast included. Located
+at Via Fontana 21, 33022 Arta Terme (UD), Italy. The site is available in
+Italian (default), English and German.
+
+## Pages
+
+- [Home](https://hotelalpi-in.it/it): Overview of the hotel, location and guest reviews.
+- [Rooms](https://hotelalpi-in.it/it/camere): All room types, prices and booking form.
+- [The Area](https://hotelalpi-in.it/it/territorio): Skiing, cycling, hiking and the Arta Terme thermal baths.
+- [Extra Services & Retreat](https://hotelalpi-in.it/it/servizi-extra-retreat): Additional services and corporate/group retreats.
+
+## Other languages
+
+- English: https://hotelalpi-in.it/en
+- Deutsch: https://hotelalpi-in.it/de
+
+## Contact
+
+- Email: info@hotelalpi-in.it
+- Phone: +39 377 374 9820

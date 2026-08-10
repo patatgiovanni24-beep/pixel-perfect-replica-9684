@@ -15,6 +15,9 @@ export const it: SiteContent = {
     contactsLabel: "Contatti",
     languageLabel: "Lingua",
     designedBy: "designed by bnbsolutions.it",
+    legalLabel: "Dati legali",
+    privacyPolicyLabel: "Privacy Policy",
+    cookiePolicyLabel: "Cookie Policy",
   },
   home: {
     meta: {
@@ -229,7 +232,9 @@ export const it: SiteContent = {
       phone: "Numero di telefono",
       message: "Messaggio / Richiesta",
       submit: "Invia richiesta",
-      successAlert: "Richiesta inviata! Ti risponderemo entro 24 ore.",
+      successAlert:
+        'Si sta aprendo il tuo programma di posta con i dati già compilati: premi "Invia" per completare la richiesta.',
+      emailSubject: "Richiesta di prenotazione dal sito",
     },
   },
   territorio: {

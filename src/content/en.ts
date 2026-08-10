@@ -15,6 +15,9 @@ export const en: SiteContent = {
     contactsLabel: "Contact",
     languageLabel: "Language",
     designedBy: "designed by bnbsolutions.it",
+    legalLabel: "Legal",
+    privacyPolicyLabel: "Privacy Policy",
+    cookiePolicyLabel: "Cookie Policy",
   },
   home: {
     meta: {
@@ -219,7 +222,9 @@ export const en: SiteContent = {
       phone: "Phone number",
       message: "Message / request",
       submit: "Send request",
-      successAlert: "Request sent! We'll get back to you within 24 hours.",
+      successAlert:
+        'Your email app is opening with the details already filled in: press "Send" to complete the request.',
+      emailSubject: "Booking request from the website",
     },
   },
   territorio: {

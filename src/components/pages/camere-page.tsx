@@ -10,6 +10,7 @@ import breakfastTable from "@/assets/breakfast-table.jpg";
 import { Section } from "@/components/site/section";
 import { Icon } from "@/components/site/icon";
 import { FaqSection } from "@/components/site/faq-section";
+import { BOOKING_EMAIL } from "@/lib/contact";
 import type { CamereContent } from "@/content/types";
 
 const ROOM_IMAGES = [
@@ -155,7 +156,21 @@ export function CamerePage({ content }: { content: CamereContent }) {
               className="mt-10 space-y-5"
               onSubmit={(e) => {
                 e.preventDefault();
+                const data = new FormData(e.currentTarget);
+                const body = [
+                  `${content.form.firstName}: ${data.get("nome")}`,
+                  `${content.form.lastName}: ${data.get("cognome")}`,
+                  `${content.form.email}: ${data.get("email")}`,
+                  `${content.form.phone}: ${data.get("tel")}`,
+                  "",
+                  `${content.form.message}:`,
+                  `${data.get("msg")}`,
+                ].join("\n");
+                const mailtoUrl = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent(
+                  content.form.emailSubject,
+                )}&body=${encodeURIComponent(body)}`;
                 alert(content.form.successAlert);
+                window.location.href = mailtoUrl;
               }}
             >
               <div className="grid gap-5 md:grid-cols-2">

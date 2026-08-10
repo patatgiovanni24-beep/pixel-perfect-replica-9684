@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import heroEntrance from "@/assets/hero-entrance.jpg";
 import logo from "@/assets/logo.svg";
+import logoHero from "@/assets/logo-hero.png";
 import lounge from "@/assets/lounge.jpg";
 import roomSingola from "@/assets/room-singola.jpg";
 import roomDoppia from "@/assets/room-doppia.jpg";
@@ -58,9 +59,9 @@ export function HomePage({ locale, content }: { locale: Locale; content: HomeCon
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center text-white">
           <div className="mb-6 h-40 w-40 overflow-hidden md:h-56 md:w-56">
             <img
-              src={logo}
+              src={logoHero}
               alt={content.hero.logoAlt}
-              className="h-full w-full origin-top scale-[1.6] object-contain drop-shadow-[0_1px_6px_rgba(0,0,0,0.5)]"
+              className="h-full w-full object-contain"
             />
           </div>
           <p className="eyebrow mt-4 text-white/85">{content.hero.location}</p>

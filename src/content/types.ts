@@ -89,6 +89,7 @@ export type CamereContent = {
     message: string;
     submit: string;
     successAlert: string;
+    emailSubject: string;
   };
 };
 
@@ -171,6 +172,9 @@ export type FooterContent = {
   contactsLabel: string;
   languageLabel: string;
   designedBy: string;
+  legalLabel: string;
+  privacyPolicyLabel: string;
+  cookiePolicyLabel: string;
 };
 
 export type SiteContent = {

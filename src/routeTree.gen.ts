@@ -23,6 +23,8 @@ import { Route as EnRoomsRouteImport } from './routes/en/rooms'
 import { Route as EnTheAreaRouteImport } from './routes/en/the-area'
 import { Route as ItIndexRouteImport } from './routes/it/index'
 import { Route as ItCamereRouteImport } from './routes/it/camere'
+import { Route as ItCookiePolicyRouteImport } from './routes/it/cookie-policy'
+import { Route as ItPrivacyPolicyRouteImport } from './routes/it/privacy-policy'
 import { Route as ItServiziExtraRetreatRouteImport } from './routes/it/servizi-extra-retreat'
 import { Route as ItTerritorioRouteImport } from './routes/it/territorio'
 
@@ -96,6 +98,16 @@ const ItCamereRoute = ItCamereRouteImport.update({
   path: '/camere',
   getParentRoute: () => ItRoute,
 } as any)
+const ItCookiePolicyRoute = ItCookiePolicyRouteImport.update({
+  id: '/cookie-policy',
+  path: '/cookie-policy',
+  getParentRoute: () => ItRoute,
+} as any)
+const ItPrivacyPolicyRoute = ItPrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => ItRoute,
+} as any)
 const ItServiziExtraRetreatRoute = ItServiziExtraRetreatRouteImport.update({
   id: '/servizi-extra-retreat',
   path: '/servizi-extra-retreat',
@@ -119,6 +131,8 @@ export interface FileRoutesByFullPath {
   '/en/rooms': typeof EnRoomsRoute
   '/en/the-area': typeof EnTheAreaRoute
   '/it/camere': typeof ItCamereRoute
+  '/it/cookie-policy': typeof ItCookiePolicyRoute
+  '/it/privacy-policy': typeof ItPrivacyPolicyRoute
   '/it/servizi-extra-retreat': typeof ItServiziExtraRetreatRoute
   '/it/territorio': typeof ItTerritorioRoute
   '/de/': typeof DeIndexRoute
@@ -134,6 +148,8 @@ export interface FileRoutesByTo {
   '/en/rooms': typeof EnRoomsRoute
   '/en/the-area': typeof EnTheAreaRoute
   '/it/camere': typeof ItCamereRoute
+  '/it/cookie-policy': typeof ItCookiePolicyRoute
+  '/it/privacy-policy': typeof ItPrivacyPolicyRoute
   '/it/servizi-extra-retreat': typeof ItServiziExtraRetreatRoute
   '/it/territorio': typeof ItTerritorioRoute
   '/de': typeof DeIndexRoute
@@ -153,6 +169,8 @@ export interface FileRoutesById {
   '/en/rooms': typeof EnRoomsRoute
   '/en/the-area': typeof EnTheAreaRoute
   '/it/camere': typeof ItCamereRoute
+  '/it/cookie-policy': typeof ItCookiePolicyRoute
+  '/it/privacy-policy': typeof ItPrivacyPolicyRoute
   '/it/servizi-extra-retreat': typeof ItServiziExtraRetreatRoute
   '/it/territorio': typeof ItTerritorioRoute
   '/de/': typeof DeIndexRoute
@@ -173,6 +191,8 @@ export interface FileRouteTypes {
     | '/en/rooms'
     | '/en/the-area'
     | '/it/camere'
+    | '/it/cookie-policy'
+    | '/it/privacy-policy'
     | '/it/servizi-extra-retreat'
     | '/it/territorio'
     | '/de/'
@@ -188,6 +208,8 @@ export interface FileRouteTypes {
     | '/en/rooms'
     | '/en/the-area'
     | '/it/camere'
+    | '/it/cookie-policy'
+    | '/it/privacy-policy'
     | '/it/servizi-extra-retreat'
     | '/it/territorio'
     | '/de'
@@ -206,6 +228,8 @@ export interface FileRouteTypes {
     | '/en/rooms'
     | '/en/the-area'
     | '/it/camere'
+    | '/it/cookie-policy'
+    | '/it/privacy-policy'
     | '/it/servizi-extra-retreat'
     | '/it/territorio'
     | '/de/'
@@ -320,6 +344,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ItCamereRouteImport
       parentRoute: typeof ItRoute
     }
+    '/it/cookie-policy': {
+      id: '/it/cookie-policy'
+      path: '/cookie-policy'
+      fullPath: '/it/cookie-policy'
+      preLoaderRoute: typeof ItCookiePolicyRouteImport
+      parentRoute: typeof ItRoute
+    }
+    '/it/privacy-policy': {
+      id: '/it/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/it/privacy-policy'
+      preLoaderRoute: typeof ItPrivacyPolicyRouteImport
+      parentRoute: typeof ItRoute
+    }
     '/it/servizi-extra-retreat': {
       id: '/it/servizi-extra-retreat'
       path: '/servizi-extra-retreat'
@@ -371,6 +409,8 @@ const EnRouteWithChildren = EnRoute._addFileChildren(EnRouteChildren)
 
 interface ItRouteChildren {
   ItCamereRoute: typeof ItCamereRoute
+  ItCookiePolicyRoute: typeof ItCookiePolicyRoute
+  ItPrivacyPolicyRoute: typeof ItPrivacyPolicyRoute
   ItServiziExtraRetreatRoute: typeof ItServiziExtraRetreatRoute
   ItTerritorioRoute: typeof ItTerritorioRoute
   ItIndexRoute: typeof ItIndexRoute
@@ -378,6 +418,8 @@ interface ItRouteChildren {
 
 const ItRouteChildren: ItRouteChildren = {
   ItCamereRoute: ItCamereRoute,
+  ItCookiePolicyRoute: ItCookiePolicyRoute,
+  ItPrivacyPolicyRoute: ItPrivacyPolicyRoute,
   ItServiziExtraRetreatRoute: ItServiziExtraRetreatRoute,
   ItTerritorioRoute: ItTerritorioRoute,
   ItIndexRoute: ItIndexRoute,

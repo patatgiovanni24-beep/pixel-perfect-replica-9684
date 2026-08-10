@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://hotelalpi-in.it/it</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://hotelalpi-in.it/it"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelalpi-in.it/en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotelalpi-in.it/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotelalpi-in.it/it"/>
+  </url>
+  <url>
+    <loc>https://hotelalpi-in.it/en</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://hotelalpi-in.it/it"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelalpi-in.it/en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotelalpi-in.it/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotelalpi-in.it/it"/>
+  </url>
+  <url>
+    <loc>https://hotelalpi-in.it/de</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://hotelalpi-in.it/it"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelalpi-in.it/en"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotelalpi-in.it/de"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotelalpi-in.it/it"/>
+  </url>
+  <url>
+    <loc>https://hotelalpi-in.it/it/camere</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://hotelalpi-in.it/it/camere"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelalpi-in.it/en/rooms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotelalpi-in.it/de/zimmer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotelalpi-in.it/it/camere"/>
+  </url>
+  <url>
+    <loc>https://hotelalpi-in.it/en/rooms</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://hotelalpi-in.it/it/camere"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelalpi-in.it/en/rooms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotelalpi-in.it/de/zimmer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotelalpi-in.it/it/camere"/>
+  </url>
+  <url>
+    <loc>https://hotelalpi-in.it/de/zimmer</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://hotelalpi-in.it/it/camere"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelalpi-in.it/en/rooms"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotelalpi-in.it/de/zimmer"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotelalpi-in.it/it/camere"/>
+  </url>
+  <url>
+    <loc>https://hotelalpi-in.it/it/territorio</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://hotelalpi-in.it/it/territorio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelalpi-in.it/en/the-area"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotelalpi-in.it/de/umgebung"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotelalpi-in.it/it/territorio"/>
+  </url>
+  <url>
+    <loc>https://hotelalpi-in.it/en/the-area</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://hotelalpi-in.it/it/territorio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelalpi-in.it/en/the-area"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotelalpi-in.it/de/umgebung"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotelalpi-in.it/it/territorio"/>
+  </url>
+  <url>
+    <loc>https://hotelalpi-in.it/de/umgebung</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://hotelalpi-in.it/it/territorio"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelalpi-in.it/en/the-area"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotelalpi-in.it/de/umgebung"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotelalpi-in.it/it/territorio"/>
+  </url>
+  <url>
+    <loc>https://hotelalpi-in.it/it/servizi-extra-retreat</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://hotelalpi-in.it/it/servizi-extra-retreat"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelalpi-in.it/en/extras-retreat"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotelalpi-in.it/de/extras-retreat"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotelalpi-in.it/it/servizi-extra-retreat"/>
+  </url>
+  <url>
+    <loc>https://hotelalpi-in.it/en/extras-retreat</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://hotelalpi-in.it/it/servizi-extra-retreat"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelalpi-in.it/en/extras-retreat"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotelalpi-in.it/de/extras-retreat"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotelalpi-in.it/it/servizi-extra-retreat"/>
+  </url>
+  <url>
+    <loc>https://hotelalpi-in.it/de/extras-retreat</loc>
+    <xhtml:link rel="alternate" hreflang="it" href="https://hotelalpi-in.it/it/servizi-extra-retreat"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hotelalpi-in.it/en/extras-retreat"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://hotelalpi-in.it/de/extras-retreat"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hotelalpi-in.it/it/servizi-extra-retreat"/>
+  </url>
+  <url>
+    <loc>https://hotelalpi-in.it/it/privacy-policy</loc>
+  </url>
+</urlset>

@@ -1,6 +1,7 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 import logo from "@/assets/logo.svg";
 import { LOCALES, PAGE_PATHS, pageKeyFromPath, type Locale } from "@/lib/i18n";
+import { LEGAL } from "@/lib/legal";
 import type { FooterContent } from "@/content/types";
 
 const LOCALE_LABELS: Record<Locale, string> = { it: "IT", en: "EN", de: "DE" };
@@ -68,15 +69,26 @@ export function Footer({ locale, content }: { locale: Locale; content: FooterCon
         </div>
       </div>
       <div className="border-t border-white/10 py-6 text-center text-xs uppercase tracking-wider text-forest-foreground/50">
-        © 2026 Hotel alpi.in ·{" "}
-        <a
-          href="https://bnbsolutions.it/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="transition hover:text-cta"
-        >
-          {content.designedBy}
-        </a>
+        <p>
+          {content.legalLabel}: {LEGAL.businessName} · P.IVA {LEGAL.vatNumber} ·{" "}
+          {LEGAL.registeredOffice}
+        </p>
+        <p className="mt-2">
+          <Link to="/it/privacy-policy" className="transition hover:text-cta">
+            {content.privacyPolicyLabel}
+          </Link>
+        </p>
+        <p className="mt-2">
+          © 2026 Hotel alpi.in ·{" "}
+          <a
+            href="https://bnbsolutions.it/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition hover:text-cta"
+          >
+            {content.designedBy}
+          </a>
+        </p>
       </div>
     </footer>
   );
