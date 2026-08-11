@@ -44,8 +44,8 @@ export function Footer({ locale, content }: { locale: Locale; content: FooterCon
         <div>
           <div className="eyebrow text-cta">{content.contactsLabel}</div>
           <div className="mt-3 text-sm text-forest-foreground/80">
-            <a href="mailto:info@hotelalpi-in.it" className="transition hover:text-cta">
-              info@hotelalpi-in.it
+            <a href="mailto:hotelalpiin@gmail.com" className="transition hover:text-cta">
+              hotelalpiin@gmail.com
             </a>
             <br />
             <a href="tel:+393773749820" className="transition hover:text-cta">

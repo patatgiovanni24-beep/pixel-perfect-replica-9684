@@ -9,7 +9,7 @@ export const hotelSchema = {
   url: SITE_URL,
   image: `${SITE_URL}/apple-touch-icon.png`,
   telephone: "+39-377-374-9820",
-  email: "info@hotelalpi-in.it",
+  email: "hotelalpiin@gmail.com",
   priceRange: "€30–€120",
   address: {
     "@type": "PostalAddress",
