@@ -79,6 +79,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "google-site-verification", content: "i7bMIrrt669yc5s7X764I4RnExoHhsRvFDaS4nxmLE0" },
       { title: "Hotel alpi.in — La tua base per le Alpi Carniche" },
       {
         name: "description",
