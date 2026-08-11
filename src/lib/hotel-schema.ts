@@ -1,4 +1,4 @@
-export const SITE_URL = "https://hotelalpi-in.it";
+export const SITE_URL = "https://www.hotelalpi-in.it";
 
 export const hotelSchema = {
   "@context": "https://schema.org",

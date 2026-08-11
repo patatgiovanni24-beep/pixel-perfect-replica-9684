@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hotelalpi-in.it/sitemap.xml
+Sitemap: https://www.hotelalpi-in.it/sitemap.xml

@@ -11,15 +11,15 @@ Italian (default), English and German.
 
 ## Pages
 
-- [Home](https://hotelalpi-in.it/it): Overview of the hotel, location and guest reviews.
-- [Rooms](https://hotelalpi-in.it/it/camere): All room types, prices and booking form.
-- [The Area](https://hotelalpi-in.it/it/territorio): Skiing, cycling, hiking and the Arta Terme thermal baths.
-- [Extra Services & Retreat](https://hotelalpi-in.it/it/servizi-extra-retreat): Additional services and corporate/group retreats.
+- [Home](https://www.hotelalpi-in.it/it): Overview of the hotel, location and guest reviews.
+- [Rooms](https://www.hotelalpi-in.it/it/camere): All room types, prices and booking form.
+- [The Area](https://www.hotelalpi-in.it/it/territorio): Skiing, cycling, hiking and the Arta Terme thermal baths.
+- [Extra Services & Retreat](https://www.hotelalpi-in.it/it/servizi-extra-retreat): Additional services and corporate/group retreats.
 
 ## Other languages
 
-- English: https://hotelalpi-in.it/en
-- Deutsch: https://hotelalpi-in.it/de
+- English: https://www.hotelalpi-in.it/en
+- Deutsch: https://www.hotelalpi-in.it/de
 
 ## Contact
 

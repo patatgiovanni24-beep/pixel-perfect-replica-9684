@@ -6,7 +6,7 @@ import { writeFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
 
-const SITE_URL = "https://hotelalpi-in.it";
+const SITE_URL = "https://www.hotelalpi-in.it";
 const LOCALES = ["it", "en", "de"];
 const DEFAULT_LOCALE = "it";
 
