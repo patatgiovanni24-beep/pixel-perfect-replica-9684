@@ -14,8 +14,7 @@ export const it: SiteContent = {
     addressLabel: "Indirizzo",
     contactsLabel: "Contatti",
     languageLabel: "Lingua",
-    designedBy: "designed by bnbsolutions.it",
-    legalLabel: "Dati legali",
+    designedBy: "Designed by bnbsolutions.it",
     privacyPolicyLabel: "Privacy Policy",
     cookiePolicyLabel: "Cookie Policy",
   },
@@ -232,8 +231,6 @@ export const it: SiteContent = {
       phone: "Numero di telefono",
       message: "Messaggio / Richiesta",
       submit: "Invia richiesta",
-      successAlert:
-        'Si sta aprendo il tuo programma di posta con i dati già compilati: premi "Invia" per completare la richiesta.',
       emailSubject: "Richiesta di prenotazione dal sito",
     },
   },

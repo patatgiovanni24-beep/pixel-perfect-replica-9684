@@ -20,19 +20,11 @@ export const Route = createFileRoute("/it/privacy-policy")({
 function PrivacyPolicyPage() {
   return (
     <LegalPage title="Privacy Policy" updatedLabel="Ultimo aggiornamento: agosto 2026">
-      <p>
-        <strong>
-          Questa è una bozza con dati provvisori (placeholder). Prima della pubblicazione pubblica
-          del sito va rivista e completata con i dati reali dell'hotel, idealmente con il supporto
-          di un consulente legale/privacy.
-        </strong>
-      </p>
-
       <h2>Titolare del trattamento</h2>
       <p>
-        {LEGAL.businessName}, P.IVA {LEGAL.vatNumber}, con sede legale in {LEGAL.registeredOffice}{" "}
-        ("Titolare"). Per qualsiasi richiesta relativa al trattamento dei tuoi dati personali puoi
-        scrivere a{" "}
+        {LEGAL.businessName}, P.IVA {LEGAL.vatNumber}, con sede legale in {LEGAL.registeredOffice},
+        titolare del sito e del marchio {LEGAL.hotelName} ("Titolare"). Per qualsiasi richiesta
+        relativa al trattamento dei tuoi dati personali puoi scrivere a{" "}
         <a href={`mailto:${LEGAL.contactEmail}`} className="text-cta underline">
           {LEGAL.contactEmail}
         </a>

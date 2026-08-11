@@ -44,8 +44,8 @@ export function Footer({ locale, content }: { locale: Locale; content: FooterCon
         <div>
           <div className="eyebrow text-cta">{content.contactsLabel}</div>
           <div className="mt-3 text-sm text-forest-foreground/80">
-            <a href="mailto:info@alpi.in" className="transition hover:text-cta">
-              info@alpi.in
+            <a href="mailto:info@hotelalpi-in.it" className="transition hover:text-cta">
+              info@hotelalpi-in.it
             </a>
             <br />
             <a href="tel:+393773749820" className="transition hover:text-cta">
@@ -70,8 +70,7 @@ export function Footer({ locale, content }: { locale: Locale; content: FooterCon
       </div>
       <div className="border-t border-white/10 py-6 text-center text-xs uppercase tracking-wider text-forest-foreground/50">
         <p>
-          {content.legalLabel}: {LEGAL.businessName} · P.IVA {LEGAL.vatNumber} ·{" "}
-          {LEGAL.registeredOffice}
+          {LEGAL.hotelName} - {LEGAL.businessName} {LEGAL.vatNumber}
         </p>
         <p className="mt-2">
           <Link to="/it/privacy-policy" className="transition hover:text-cta">
@@ -79,7 +78,6 @@ export function Footer({ locale, content }: { locale: Locale; content: FooterCon
           </Link>
         </p>
         <p className="mt-2">
-          © 2026 Hotel alpi.in ·{" "}
           <a
             href="https://bnbsolutions.it/"
             target="_blank"

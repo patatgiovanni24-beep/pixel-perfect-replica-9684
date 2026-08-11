@@ -14,8 +14,7 @@ export const en: SiteContent = {
     addressLabel: "Address",
     contactsLabel: "Contact",
     languageLabel: "Language",
-    designedBy: "designed by bnbsolutions.it",
-    legalLabel: "Legal",
+    designedBy: "Designed by bnbsolutions.it",
     privacyPolicyLabel: "Privacy Policy",
     cookiePolicyLabel: "Cookie Policy",
   },
@@ -222,8 +221,6 @@ export const en: SiteContent = {
       phone: "Phone number",
       message: "Message / request",
       submit: "Send request",
-      successAlert:
-        'Your email app is opening with the details already filled in: press "Send" to complete the request.',
       emailSubject: "Booking request from the website",
     },
   },

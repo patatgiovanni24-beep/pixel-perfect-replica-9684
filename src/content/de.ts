@@ -14,8 +14,7 @@ export const de: SiteContent = {
     addressLabel: "Adresse",
     contactsLabel: "Kontakt",
     languageLabel: "Sprache",
-    designedBy: "designed by bnbsolutions.it",
-    legalLabel: "Rechtliches",
+    designedBy: "Designed by bnbsolutions.it",
     privacyPolicyLabel: "Datenschutzerklärung",
     cookiePolicyLabel: "Cookie-Richtlinie",
   },
@@ -237,8 +236,6 @@ export const de: SiteContent = {
       phone: "Telefonnummer",
       message: "Nachricht / Anfrage",
       submit: "Anfrage senden",
-      successAlert:
-        'Ihr E-Mail-Programm wird mit den bereits ausgefüllten Daten geöffnet: klicken Sie auf "Senden", um die Anfrage abzuschließen.',
       emailSubject: "Buchungsanfrage von der Website",
     },
   },

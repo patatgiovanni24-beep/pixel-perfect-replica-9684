@@ -60,8 +60,8 @@ function CookiePolicyPage() {
 
       <h2>Titolare del trattamento</h2>
       <p>
-        {LEGAL.businessName}, P.IVA {LEGAL.vatNumber}, {LEGAL.registeredOffice} —{" "}
-        {LEGAL.contactEmail}
+        {LEGAL.businessName}, P.IVA {LEGAL.vatNumber}, {LEGAL.registeredOffice} — titolare del sito
+        e del marchio {LEGAL.hotelName} — {LEGAL.contactEmail}
       </p>
     </LegalPage>
   );

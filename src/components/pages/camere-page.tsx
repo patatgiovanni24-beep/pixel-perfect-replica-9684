@@ -169,7 +169,6 @@ export function CamerePage({ content }: { content: CamereContent }) {
                 const mailtoUrl = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent(
                   content.form.emailSubject,
                 )}&body=${encodeURIComponent(body)}`;
-                alert(content.form.successAlert);
                 window.location.href = mailtoUrl;
               }}
             >
