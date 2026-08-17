@@ -237,7 +237,7 @@ export const it: SiteContent = {
         'Attenzione: il messaggio non è stato ancora inviato. Dopo averlo aperto, premi "Invia" per completare la richiesta.',
       sendWithGmail: "Invia con Gmail",
       openMailApp: "Apri il programma di posta",
-      copyMessage: "Copia il messaggio",
+      copyMessage: "Copia il messaggio e invialo manualmente",
       copied: "Copiato!",
       newRequest: "Compila un'altra richiesta",
     },

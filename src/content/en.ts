@@ -227,7 +227,7 @@ export const en: SiteContent = {
         'Note: the message has not been sent yet. After it opens, press "Send" to complete your request.',
       sendWithGmail: "Send with Gmail",
       openMailApp: "Open your email app",
-      copyMessage: "Copy the message",
+      copyMessage: "Copy the message and send it manually",
       copied: "Copied!",
       newRequest: "Fill in another request",
     },

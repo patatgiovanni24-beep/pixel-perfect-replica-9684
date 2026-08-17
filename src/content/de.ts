@@ -242,7 +242,7 @@ export const de: SiteContent = {
         'Achtung: Die Nachricht wurde noch nicht gesendet. Klicken Sie nach dem Öffnen auf "Senden", um die Anfrage abzuschließen.',
       sendWithGmail: "Mit Gmail senden",
       openMailApp: "E-Mail-Programm öffnen",
-      copyMessage: "Nachricht kopieren",
+      copyMessage: "Nachricht kopieren und manuell versenden",
       copied: "Kopiert!",
       newRequest: "Weitere Anfrage ausfüllen",
     },
