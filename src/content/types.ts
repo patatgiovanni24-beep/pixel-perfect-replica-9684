@@ -91,6 +91,7 @@ export type CamereContent = {
     emailSubject: string;
     readyTitle: string;
     readySubtitle: string;
+    readyWarning: string;
     openGmail: string;
     openMailApp: string;
     copyMessage: string;
