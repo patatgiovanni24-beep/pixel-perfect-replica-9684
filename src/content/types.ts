@@ -89,6 +89,13 @@ export type CamereContent = {
     message: string;
     submit: string;
     emailSubject: string;
+    readyTitle: string;
+    readySubtitle: string;
+    openGmail: string;
+    openMailApp: string;
+    copyMessage: string;
+    copied: string;
+    newRequest: string;
   };
 };
 

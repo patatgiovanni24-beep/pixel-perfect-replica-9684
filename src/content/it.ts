@@ -232,6 +232,14 @@ export const it: SiteContent = {
       message: "Messaggio / Richiesta",
       submit: "Invia richiesta",
       emailSubject: "Richiesta di prenotazione dal sito",
+      readyTitle: "Richiesta pronta per l'invio",
+      readySubtitle:
+        "Se non si è aperto automaticamente il tuo programma di posta, scegli come inviarla:",
+      openGmail: "Apri Gmail",
+      openMailApp: "Apri il programma di posta",
+      copyMessage: "Copia il messaggio",
+      copied: "Copiato!",
+      newRequest: "Compila un'altra richiesta",
     },
   },
   territorio: {

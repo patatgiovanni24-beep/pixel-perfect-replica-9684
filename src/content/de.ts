@@ -237,6 +237,14 @@ export const de: SiteContent = {
       message: "Nachricht / Anfrage",
       submit: "Anfrage senden",
       emailSubject: "Buchungsanfrage von der Website",
+      readyTitle: "Ihre Anfrage ist bereit zum Versenden",
+      readySubtitle:
+        "Falls sich Ihr E-Mail-Programm nicht automatisch geöffnet hat, wählen Sie eine Option:",
+      openGmail: "Gmail öffnen",
+      openMailApp: "E-Mail-Programm öffnen",
+      copyMessage: "Nachricht kopieren",
+      copied: "Kopiert!",
+      newRequest: "Weitere Anfrage ausfüllen",
     },
   },
   territorio: {

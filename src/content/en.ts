@@ -222,6 +222,13 @@ export const en: SiteContent = {
       message: "Message / request",
       submit: "Send request",
       emailSubject: "Booking request from the website",
+      readyTitle: "Your request is ready to send",
+      readySubtitle: "If your email app didn't open automatically, choose how to send it:",
+      openGmail: "Open Gmail",
+      openMailApp: "Open your email app",
+      copyMessage: "Copy the message",
+      copied: "Copied!",
+      newRequest: "Fill in another request",
     },
   },
   territorio: {

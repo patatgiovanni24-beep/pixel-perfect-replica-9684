@@ -64,6 +64,7 @@ export function HomePage({ locale, content }: { locale: Locale; content: HomeCon
               className="h-full w-full object-contain"
             />
           </div>
+          <h1 className="font-display text-3xl lowercase text-white md:text-4xl">alpi.in</h1>
           <p className="eyebrow mt-4 text-white/85">{content.hero.location}</p>
           <p className="mt-8 max-w-xl text-lg font-light leading-relaxed text-white/95 md:text-xl">
             {content.hero.tagline}

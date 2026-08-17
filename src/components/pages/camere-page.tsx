@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import roomSingola from "@/assets/room-singola.jpg";
 import roomDoppia from "@/assets/room-doppia.jpg";
 import roomTripla from "@/assets/room-tripla.jpg";
@@ -26,6 +26,12 @@ export function CamerePage({ content }: { content: CamereContent }) {
   const formRef = useRef<HTMLDivElement>(null);
   const scrollToForm = () =>
     formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const [submission, setSubmission] = useState<{
+    mailto: string;
+    gmail: string;
+    text: string;
+  } | null>(null);
+  const [copied, setCopied] = useState(false);
 
   return (
     <>
@@ -152,39 +158,89 @@ export function CamerePage({ content }: { content: CamereContent }) {
               <h2 className="mt-3 font-display text-4xl md:text-5xl">{content.form.title}</h2>
               <p className="mt-4 text-forest-foreground/80">{content.form.subtitle}</p>
             </div>
-            <form
-              className="mt-10 space-y-5"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const data = new FormData(e.currentTarget);
-                const body = [
-                  `${content.form.firstName}: ${data.get("nome")}`,
-                  `${content.form.lastName}: ${data.get("cognome")}`,
-                  `${content.form.email}: ${data.get("email")}`,
-                  `${content.form.phone}: ${data.get("tel")}`,
-                  "",
-                  `${content.form.message}:`,
-                  `${data.get("msg")}`,
-                ].join("\n");
-                const mailtoUrl = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent(
-                  content.form.emailSubject,
-                )}&body=${encodeURIComponent(body)}`;
-                window.location.href = mailtoUrl;
-              }}
-            >
-              <div className="grid gap-5 md:grid-cols-2">
-                <Field label={content.form.firstName} name="nome" />
-                <Field label={content.form.lastName} name="cognome" />
-                <Field label={content.form.email} name="email" type="email" />
-                <Field label={content.form.phone} name="tel" type="tel" />
-              </div>
-              <Field label={content.form.message} name="msg" textarea />
-              <div className="pt-2 text-center">
-                <button type="submit" className="btn-cta">
-                  {content.form.submit}
+            {submission ? (
+              <div className="mt-10 space-y-6 text-center">
+                <p className="font-display text-2xl">{content.form.readyTitle}</p>
+                <p className="text-forest-foreground/80">{content.form.readySubtitle}</p>
+                <div className="flex flex-col items-center gap-4">
+                  <a
+                    href={submission.gmail}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-cta"
+                  >
+                    {content.form.openGmail}
+                  </a>
+                  <a
+                    href={submission.mailto}
+                    className="text-sm text-forest-foreground/80 underline transition hover:text-cta"
+                  >
+                    {content.form.openMailApp}
+                  </a>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      try {
+                        await navigator.clipboard.writeText(submission.text);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
+                      } catch {
+                        // clipboard unavailable — the other two options still work
+                      }
+                    }}
+                    className="text-sm text-forest-foreground/80 underline transition hover:text-cta"
+                  >
+                    {copied ? content.form.copied : content.form.copyMessage}
+                  </button>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setSubmission(null)}
+                  className="text-xs text-forest-foreground/60 underline transition hover:text-cta"
+                >
+                  {content.form.newRequest}
                 </button>
               </div>
-            </form>
+            ) : (
+              <form
+                className="mt-10 space-y-5"
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const data = new FormData(e.currentTarget);
+                  const body = [
+                    `${content.form.firstName}: ${data.get("nome")}`,
+                    `${content.form.lastName}: ${data.get("cognome")}`,
+                    `${content.form.email}: ${data.get("email")}`,
+                    `${content.form.phone}: ${data.get("tel")}`,
+                    "",
+                    `${content.form.message}:`,
+                    `${data.get("msg")}`,
+                  ].join("\n");
+                  const mailtoUrl = `mailto:${BOOKING_EMAIL}?subject=${encodeURIComponent(
+                    content.form.emailSubject,
+                  )}&body=${encodeURIComponent(body)}`;
+                  const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+                    BOOKING_EMAIL,
+                  )}&su=${encodeURIComponent(content.form.emailSubject)}&body=${encodeURIComponent(body)}`;
+                  const text = `${content.form.email}: ${BOOKING_EMAIL}\n${content.form.emailSubject}\n\n${body}`;
+                  setSubmission({ mailto: mailtoUrl, gmail: gmailUrl, text });
+                  window.location.href = mailtoUrl;
+                }}
+              >
+                <div className="grid gap-5 md:grid-cols-2">
+                  <Field label={content.form.firstName} name="nome" />
+                  <Field label={content.form.lastName} name="cognome" />
+                  <Field label={content.form.email} name="email" type="email" />
+                  <Field label={content.form.phone} name="tel" type="tel" />
+                </div>
+                <Field label={content.form.message} name="msg" textarea />
+                <div className="pt-2 text-center">
+                  <button type="submit" className="btn-cta">
+                    {content.form.submit}
+                  </button>
+                </div>
+              </form>
+            )}
           </div>
         </Section>
       </div>
