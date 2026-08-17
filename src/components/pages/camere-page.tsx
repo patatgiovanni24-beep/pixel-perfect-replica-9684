@@ -161,7 +161,6 @@ export function CamerePage({ content }: { content: CamereContent }) {
             {submission ? (
               <div className="mt-10 space-y-6 text-center">
                 <p className="font-display text-2xl">{content.form.readyTitle}</p>
-                <p className="text-forest-foreground/80">{content.form.readySubtitle}</p>
                 <p className="mx-auto max-w-md rounded-md border border-cta/40 bg-cta/10 px-4 py-3 text-sm font-medium text-cta">
                   {content.form.readyWarning}
                 </p>
@@ -172,7 +171,7 @@ export function CamerePage({ content }: { content: CamereContent }) {
                     rel="noopener noreferrer"
                     className="btn-cta"
                   >
-                    {content.form.openGmail}
+                    {content.form.sendWithGmail}
                   </a>
                   <a
                     href={submission.mailto}

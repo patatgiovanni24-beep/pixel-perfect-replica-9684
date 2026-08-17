@@ -238,10 +238,9 @@ export const de: SiteContent = {
       submit: "Anfrage senden",
       emailSubject: "Buchungsanfrage von der Website",
       readyTitle: "Ihre Anfrage ist bereit zum Versenden",
-      readySubtitle: "Wählen Sie, wie Sie die vorausgefüllte Nachricht öffnen möchten:",
       readyWarning:
         'Achtung: Die Nachricht wurde noch nicht gesendet. Klicken Sie nach dem Öffnen auf "Senden", um die Anfrage abzuschließen.',
-      openGmail: "Gmail öffnen",
+      sendWithGmail: "Mit Gmail senden",
       openMailApp: "E-Mail-Programm öffnen",
       copyMessage: "Nachricht kopieren",
       copied: "Kopiert!",

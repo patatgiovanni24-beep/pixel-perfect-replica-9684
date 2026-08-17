@@ -233,10 +233,9 @@ export const it: SiteContent = {
       submit: "Invia richiesta",
       emailSubject: "Richiesta di prenotazione dal sito",
       readyTitle: "Richiesta pronta per l'invio",
-      readySubtitle: "Scegli come aprire il messaggio già compilato:",
       readyWarning:
         'Attenzione: il messaggio non è stato ancora inviato. Dopo averlo aperto, premi "Invia" per completare la richiesta.',
-      openGmail: "Apri Gmail",
+      sendWithGmail: "Invia con Gmail",
       openMailApp: "Apri il programma di posta",
       copyMessage: "Copia il messaggio",
       copied: "Copiato!",

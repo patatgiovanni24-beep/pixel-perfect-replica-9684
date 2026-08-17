@@ -223,10 +223,9 @@ export const en: SiteContent = {
       submit: "Send request",
       emailSubject: "Booking request from the website",
       readyTitle: "Your request is ready to send",
-      readySubtitle: "Choose how to open the pre-filled message:",
       readyWarning:
         'Note: the message has not been sent yet. After it opens, press "Send" to complete your request.',
-      openGmail: "Open Gmail",
+      sendWithGmail: "Send with Gmail",
       openMailApp: "Open your email app",
       copyMessage: "Copy the message",
       copied: "Copied!",
